@@ -28,7 +28,6 @@ public class DraggableIngredient : MonoBehaviour
     public void DropHandler(BaseEventData basedata)
     {
         PointerEventData data = (PointerEventData) basedata;
-        Debug.Log("Ingredient Drop with data " + data);
         // if drop failed (not close enough to cauldron)
         if (!cauldron.DropIngredient(this))
         {
