@@ -11,6 +11,9 @@ public class Cauldron : MonoBehaviour
     public Transform potionShelf;
     public CraftedPotion potionPrefab;
     public Button stirButton;
+    public Button trashButton;
+    public IngredientShelf ingredientShelf;
+    public bool refundTrashedIngredients;
     // when the player should be stirring but isn't, how fast do they lose progress?
     // higher number = more punishing
     public float unstirRatio;
@@ -28,8 +31,8 @@ public class Cauldron : MonoBehaviour
     public void Start()
     {
         addedIngredients = new List<Ingredient>();
-        if (stirButton == null) stirButton = transform.GetComponentInChildren<Button>();
         stirButton.gameObject.SetActive(false);
+        trashButton.gameObject.SetActive(false);
     }
 
     // called by a DraggableIngredient
@@ -41,6 +44,9 @@ public class Cauldron : MonoBehaviour
             addedIngredients.Add(ingredient.ingredientName);
             Destroy(ingredient.gameObject);
             Debug.Log(string.Join(", ", addedIngredients));
+
+            trashButton.gameObject.SetActive(true);
+
             CheckAgainstRecipes();
             return true;
         }
@@ -56,12 +62,34 @@ public class Cauldron : MonoBehaviour
                 Debug.Log("Recipe made! Ready to stir " + r.potionName);
                 stirButton.gameObject.SetActive(true);
                 currentRecipe = r;
-                stirTime = 0;
-                stirButton.image.fillAmount = 0;
+
                 canStir = true;
                 isStirring = false;
+                stirTime = 0;
+                return;
             }
         }
+        stirButton.gameObject.SetActive(false);
+
+        canStir = false;
+        isStirring = false;
+        stirTime = 0;
+    }
+
+    public void TrashButtonOnClick()
+    {
+        if (refundTrashedIngredients)
+        {
+            ingredientShelf.RefundIngredients(this, addedIngredients);
+        }
+        addedIngredients.Clear();
+
+        stirButton.gameObject.SetActive(false);
+        trashButton.gameObject.SetActive(false);
+
+        canStir = false;
+        isStirring = false;
+        stirTime = 0;
     }
 
     public void StirButtonOnMouseDown(BaseEventData basedata)
@@ -104,8 +132,11 @@ public class Cauldron : MonoBehaviour
                 // reset
                 addedIngredients.Clear();
                 stirButton.gameObject.SetActive(false);
+                trashButton.gameObject.SetActive(false);
+
                 canStir = false;
                 isStirring = false;
+                stirTime = 0;
             }
         }
     }
