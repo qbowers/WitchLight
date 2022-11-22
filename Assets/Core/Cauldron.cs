@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class Cauldron : MonoBehaviour
@@ -9,9 +10,13 @@ public class Cauldron : MonoBehaviour
     public int validDropDistance;
     public Transform potionShelf;
     public CraftedPotion potionPrefab;
-    public Transform spoon;
-    public float spoonSpeed;
-    public float spoonMagnitude;
+    public Button stirButton;
+    public Button trashButton;
+    public IngredientShelf ingredientShelf;
+    public bool refundTrashedIngredients;
+    // when the player should be stirring but isn't, how fast do they lose progress?
+    // higher number = more punishing
+    public float unstirRatio;
     public List<Recipe> recipes;
 
     // adding ingredients
@@ -20,15 +25,14 @@ public class Cauldron : MonoBehaviour
 
     // stirring
     private bool canStir = false;
-    private float successfulStirTime;
-    private float failedStirTime;
-    private float stirStartTime;
-    private Collider2D spoonCollider;
+    private bool isStirring = false;
+    private float stirTime = 0;
 
     public void Start()
     {
         addedIngredients = new List<Ingredient>();
-        spoonCollider = spoon.GetComponent<Collider2D>();
+        stirButton.gameObject.SetActive(false);
+        trashButton.gameObject.SetActive(false);
     }
 
     // called by a DraggableIngredient
@@ -40,6 +44,9 @@ public class Cauldron : MonoBehaviour
             addedIngredients.Add(ingredient.ingredientName);
             Destroy(ingredient.gameObject);
             Debug.Log(string.Join(", ", addedIngredients));
+
+            trashButton.gameObject.SetActive(true);
+
             CheckAgainstRecipes();
             return true;
         }
@@ -53,58 +60,83 @@ public class Cauldron : MonoBehaviour
             if (addedIngredients.SequenceEqual(r.ingredients))
             {
                 Debug.Log("Recipe made! Ready to stir " + r.potionName);
+                stirButton.gameObject.SetActive(true);
                 currentRecipe = r;
-                successfulStirTime = 0;
-                failedStirTime = 0;
-                stirStartTime = Time.time;
+
                 canStir = true;
+                isStirring = false;
+                stirTime = 0;
+                return;
             }
+        }
+        stirButton.gameObject.SetActive(false);
+
+        canStir = false;
+        isStirring = false;
+        stirTime = 0;
+    }
+
+    public void TrashButtonOnClick()
+    {
+        if (refundTrashedIngredients)
+        {
+            ingredientShelf.RefundIngredients(this, addedIngredients);
+        }
+        addedIngredients.Clear();
+
+        stirButton.gameObject.SetActive(false);
+        trashButton.gameObject.SetActive(false);
+
+        canStir = false;
+        isStirring = false;
+        stirTime = 0;
+    }
+
+    public void StirButtonOnMouseDown(BaseEventData basedata)
+    {
+        if (canStir) 
+        {
+            isStirring = true;
         }
     }
 
-    public void SpoonOnMouseDrag(BaseEventData basedata)
+    public void StirButtonOnMouseUpOrExit(BaseEventData basedata)
     {
-
+        isStirring = false;
     }
 
     public void Update()
     {
         if (canStir)
         {
-            // move the spoon
-            Vector3 newPosition = spoon.localPosition;
-            newPosition.x = Mathf.Sin((Time.time - stirStartTime) * Mathf.PI * spoonSpeed) * spoonMagnitude;
-            spoon.localPosition = newPosition;
-
-            // check for mouse over spoon
-            if (spoonCollider.OverlapPoint(Input.mousePosition))
+            // add stir time if applicable
+            if (isStirring)
             {
-                Debug.Log("overlapping point");
-                successfulStirTime += Time.deltaTime;
+                stirTime += Time.deltaTime;
             }
             else
             {
-                failedStirTime += Time.deltaTime;
+                stirTime -= Time.deltaTime * unstirRatio;
+                if (stirTime < 0) stirTime = 0;
             }
 
+            // fill graphics
+            stirButton.image.fillAmount = (stirTime / currentRecipe.successfulStirTime);
+
             // check if we've been stirring for long enough
-            if (successfulStirTime >= currentRecipe.successfulStirTime)
+            if (stirTime >= currentRecipe.successfulStirTime)
             {
                 Debug.Log("Finished stirring!");
                 var newPotion = Instantiate(potionPrefab, potionShelf);
                 newPotion.Set(currentRecipe.potionName, currentRecipe.potionColor);
                 // reset
                 addedIngredients.Clear();
+                stirButton.gameObject.SetActive(false);
+                trashButton.gameObject.SetActive(false);
+
                 canStir = false;
-            }
-            // or we've failed long enough
-            else if (failedStirTime >= currentRecipe.failedStirTime)
-            {
-                Debug.Log("Failed potion.");
-                // TODO: report error to user better
-                // reset
-                addedIngredients.Clear();
-                canStir = false;
+                isStirring = false;
+                stirTime = 0;
             }
         }
     }
