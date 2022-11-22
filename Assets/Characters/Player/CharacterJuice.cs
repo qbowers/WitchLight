@@ -57,11 +57,11 @@ public class CharacterJuice : MonoBehaviour
     }
 
     void Update() {
-        tiltCharacter();
+        // tiltCharacter();
 
         //We need to change the character's running animation to suit their current speed
-        runningSpeed = Mathf.Clamp(Mathf.Abs(moveScript.velocity.x), 0, maxSpeed);
-        myAnimator.SetFloat("runSpeed", runningSpeed);
+        // runningSpeed = Mathf.Clamp(Mathf.Abs(moveScript.velocity.x), 0, maxSpeed);
+        // myAnimator.SetFloat("runSpeed", runningSpeed);
 
         // checkForLanding();
 
