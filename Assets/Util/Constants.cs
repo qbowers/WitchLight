@@ -7,7 +7,7 @@ public class Constants {
     public static string[] Menus = new string[]{StartMenuScene, PauseMenuScene, GameOverMenuScene, WinMenuScene};
 
     public const string LevelSystemsScene = "LevelSystems";
-    public const string LevelOne = "Level_Jump";
+    public const string LevelOne = "Level 2";
 
     public const string mouseAimBinding = "FPS_player";
     public const string keyboardAimBinding = "Platformer_player";
