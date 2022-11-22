@@ -12,6 +12,7 @@ public class CoreManager : MonoBehaviour {
     public string openLevel = Constants.LevelOne; 
 
     public LevelManager levelManager;
+    public MusicManager musicManager;
     public PlayerControls playerControls;
     public PlayerControls.OverarchingActions controlMap;
     public PlayerControls.PlayerActions playerMap;
@@ -47,6 +48,7 @@ public class CoreManager : MonoBehaviour {
         // e.g. audiomanager, levelmanager, etc.
 
         this.levelManager = FindOrCreate<LevelManager>();
+        this.musicManager = FindOrCreate<MusicManager>();
     }
 
     public T FindOrCreate<T>() where T:Component {
