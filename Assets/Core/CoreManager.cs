@@ -16,6 +16,8 @@ public class CoreManager : MonoBehaviour {
     public PlayerControls.OverarchingActions controlMap;
     public PlayerControls.PlayerActions playerMap;
 
+    public GameObject camera;
+
     // Change this flag to switch between FPS and platformer controls
     public string bindingGroupFilter = Constants.mouseAimBinding;
 
@@ -46,6 +48,7 @@ public class CoreManager : MonoBehaviour {
         // Find or create instances of all other required managers, DontDestroyOnLoad as required
         // e.g. audiomanager, levelmanager, etc.
 
+        this.camera = transform.Find("Main Camera").gameObject;
         this.levelManager = FindOrCreate<LevelManager>();
     }
 
