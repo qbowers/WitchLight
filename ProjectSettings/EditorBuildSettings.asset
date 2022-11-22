@@ -8,4 +8,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Levels/DebugEnvironment/Level 2.unity
+    guid: c1ae291ea6e533a4686ca70e04187006
+  - enabled: 1
+    path: Assets/Core/Core.unity
+    guid: a239728e12dda70448683d62621efc11
+  - enabled: 1
+    path: Assets/Menus/Win Menu.unity
+    guid: f3c51e58d68ffec42abcd85a7bc326e7
+  - enabled: 1
+    path: Assets/Menus/Start Menu.unity
+    guid: ac5ab1968c431e74886abf8493948e55
+  - enabled: 1
+    path: Assets/Menus/Pause Menu.unity
+    guid: e9eb2e29f3f999f4a9cabcfe459021f9
+  - enabled: 1
+    path: Assets/Menus/Game Over.unity
+    guid: 19d29b4369a54184882348d9b8fef36b
+  - enabled: 1
+    path: Assets/Levels/Level Systems.unity
+    guid: 2d632482f43f91d4d830b9060bcff16d
   m_configObjects: {}
