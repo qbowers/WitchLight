@@ -39,6 +39,7 @@ public class Cauldron : MonoBehaviour
     // returns whether it was successfully dropped (ie is close enough)
     public bool DropIngredient(DraggableIngredient ingredient)
     {
+        // Debug.Log("DropIngredient called");
         if ((ingredient.transform.position - transform.position).magnitude < validDropDistance)
         {
             addedIngredients.Add(ingredient.ingredientName);

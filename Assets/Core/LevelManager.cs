@@ -50,6 +50,13 @@ public class LevelManager : MonoBehaviour {
         CoreManager.instance.LoadMenu(Constants.PauseMenuScene);
         // poke scene_manager.menu_manager
     }
+
+    public void PauseInput()
+    {
+        Debug.Log("Pausing input");
+        this.playerMap.Disable();
+    }
+    
     public void Play() {
         Debug.Log("UnPause!");
         this.paused = false;

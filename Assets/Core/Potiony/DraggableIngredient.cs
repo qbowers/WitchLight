@@ -25,6 +25,7 @@ public class DraggableIngredient : MonoBehaviour
         transform.position = data.position;
     }
 
+    // actually uses EndDragHandler event trigger
     public void DropHandler(BaseEventData basedata)
     {
         PointerEventData data = (PointerEventData) basedata;

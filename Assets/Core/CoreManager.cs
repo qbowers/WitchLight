@@ -61,9 +61,10 @@ public class CoreManager : MonoBehaviour {
     } 
 
 
-    public void LoadLevel(string levelName) {
+    public void LoadLevel(string levelName, bool additive = false) {
         // if level systems don't exist, load them
-        SceneManager.LoadScene(Constants.LevelSystemsScene, LoadSceneMode.Single);
+        if (additive) SceneManager.LoadScene(Constants.LevelSystemsScene, LoadSceneMode.Additive);
+        else SceneManager.LoadScene(Constants.LevelSystemsScene, LoadSceneMode.Single);
         // additively load scene
         SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
         // ping the levelmanager that the level is open
