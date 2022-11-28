@@ -13,15 +13,14 @@ public class Inventory : MonoBehaviour {
         }
         return 0;
     }
-    
+
     public void collectInv(Collectable item) {
-        if (!item.collected){
-            int cnt = getItemCnt(item.id);
-            inv[item.id] = cnt + item.cnt;
-            Debug.Log(inv[item.id]+ " " + item.id + " in inv");
-            item.collected = true;
-            changeInvUI(item.id);
-        } 
+        
+        int cnt = getItemCnt(item.id);
+        inv[item.id] = cnt + item.cnt;
+        Debug.Log(inv[item.id]+ " " + item.id + " in inv");
+        changeInvUI(item.id);
+    
     }
 
     public bool enough(string costName, int costCnt) {
