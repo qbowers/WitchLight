@@ -4,19 +4,14 @@ using UnityEngine.InputSystem;
 //This script handles moving the character on the Y axis, for jumping and gravity
 
 public class CharacterJump : MonoBehaviour {
-    [Header("Components")]
-    [HideInInspector] public Rigidbody2D body;
+
+    private Rigidbody2D body;
     private CharacterGround ground;
-    public Vector2 velocity;
+    private Vector2 velocity;
     private CharacterJuice juice;
 
     [Header("Jumping Stats")]
     [SerializeField, Range(2f, 10f)][Tooltip("Maximum jump height")] public float jumpHeight = 7.3f;
-
-
-//If you're using your stats from Platformer Toolkit with this character controller, please note that the number on the Jump Duration handle does not match this stat
-//It is re-scaled, from 0.2f - 1.25f, to 1 - 10.
-//You can transform the number on screen to the stat here, using the function at the bottom of this script
 
     [SerializeField, Range(0.2f, 1.25f)][Tooltip("How long it takes to reach that height before coming back down")] public float timeToJumpApex;
     [SerializeField, Range(0f, 5f)][Tooltip("Gravity multiplier to apply when going up")] public float upwardMovementMultiplier = 1f;
@@ -36,13 +31,13 @@ public class CharacterJump : MonoBehaviour {
     public float gravMultiplier;
 
     [Header("Current State")]
-    public bool canJumpAgain = false;
-    public bool desiredJump;
-    private float jumpBufferCounter;
-    private float coyoteTimeCounter = 0;
-    public bool pressingJump;
-    public bool onGround;
-    public bool currentlyJumping;
+    [SerializeField, ReadOnlyField] bool canJumpAgain = false;
+    [SerializeField, ReadOnlyField] bool desiredJump;
+    [SerializeField, ReadOnlyField] float jumpBufferCounter;
+    [SerializeField, ReadOnlyField] float coyoteTimeCounter = 0;
+    [SerializeField, ReadOnlyField] bool pressingJump;
+    [SerializeField, ReadOnlyField] public bool onGround;
+    [SerializeField, ReadOnlyField] bool currentlyJumping;
 
     void Awake() {
         //Find the character's Rigidbody and ground detection and juice scripts
