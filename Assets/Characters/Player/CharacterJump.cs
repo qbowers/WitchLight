@@ -191,15 +191,15 @@ public class CharacterJump : MonoBehaviour {
                 jumpSpeed = Mathf.Max(jumpSpeed - velocity.y, 0f);
             }
             else if (velocity.y < 0f) {
-                Debug.Log("jump speed before adding " + jumpSpeed);
+                // Debug.Log("jump speed before adding " + jumpSpeed);
                 jumpSpeed += Mathf.Abs(body.velocity.y);
-                Debug.Log("velocity collected " + body.velocity.y);
+                // Debug.Log("velocity collected " + body.velocity.y);
             }
 
             //Apply the new jumpSpeed to the velocity. It will be sent to the Rigidbody in FixedUpdate;
-            Debug.Log(velocity.y);    
+            // Debug.Log(velocity.y);    
             velocity.y += jumpSpeed;
-            Debug.Log(velocity.y);    
+            // Debug.Log(velocity.y);    
             currentlyJumping = true;
 
             if (juice != null) {
