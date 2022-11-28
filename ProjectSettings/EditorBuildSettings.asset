@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/LevelSystems.unity
     guid: 2d632482f43f91d4d830b9060bcff16d
+  - enabled: 1
+    path: Assets/Levels/PotionBrewing.unity
+    guid: ff116b1c1725c48cfbfb5ebd66417065
   m_configObjects: {}

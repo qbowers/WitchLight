@@ -9,8 +9,7 @@ public struct Recipe
     public string potionName;
     public Color potionColor;
     public Ingredient[] ingredients;
-    public float successfulStirTime; // how long on the spoon until you succeed?
-    public float failedStirTime; // how long off the spoon until you fail?
+    public float successfulStirTime; // how long until you succeed?
 }
 
 public enum Ingredient
