@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Monster
+  - Distraction
   layers:
   - Default
   - TransparentFX
