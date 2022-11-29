@@ -8,10 +8,10 @@ public class PotionSceneTrigger : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D other) {
 
-        if (other.gameObject.name != "Player") {
+        if (!Utils.IsPlayer(other.gameObject)) {
             return;
         }
 
-        CoreManager.instance.levelManager.OpenPotionScreen();
+        CoreManager.instance.OpenPotionScreen();
     }
 }

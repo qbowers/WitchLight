@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GhostMonsterMovement : MonoBehaviour {
     public float speed = 1.0f;
-    public Vector3 initialPosition = new Vector3(0.0f, 0.0f, 0.0f);
+    
+    public Transform player;
 
     void FixedUpdate() {
-        var playerPosition = GameObject.Find("Player").transform.position;
+        var playerPosition = player.position;
 
         var step = speed * Time.deltaTime;
 

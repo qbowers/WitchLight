@@ -105,6 +105,8 @@ GameObject:
   - component: {fileID: 3815714499491088956}
   - component: {fileID: 2062174977}
   - component: {fileID: 2002257035}
+  - component: {fileID: 1802973711}
+  - component: {fileID: 1802973712}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5171,4 +5173,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f176c5911b3834fb615d2bc00f94e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 2002257034}
+--- !u!114 &1802973711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3815714499491088949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0eb14407c764e74880dbc82e9870c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  costs:
+    keys: 01000000
+    values: 01000000
+  bindingName: Action1
+  jumpHeight: 50
+--- !u!114 &1802973712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3815714499491088949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e520274f1bfa8340a6385dfe5509de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 1802973711}

@@ -16,6 +16,13 @@ public class Constants {
 
     public const string mouseAimBinding = "FPS_player";
     public const string keyboardAimBinding = "Platformer_player";
+
+    public const string DoorTag = "Door";
+    public const string PlayerCamTag = "PlayerCam";
+    public const string MonsterTag = "Monster";
+    public const string PlayerTag = "Player";
+    public const string LevelConfinerTag = "LevelConfiner";
+
 }
 
 public enum ItemType {

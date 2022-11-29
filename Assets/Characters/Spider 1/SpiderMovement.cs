@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderMovement : MonoBehaviour
-{
+public class SpiderMovement : MonoBehaviour {
     
     public bool alwaysDetect;
     public float detectionRange;
@@ -13,8 +12,7 @@ public class SpiderMovement : MonoBehaviour
     public bool detected = false;
 
     // Start is called before the first frame update
-    void Update()
-    {
+    void Update() {
         if (!alwaysDetect){
             var hitColliders = Physics2D.OverlapCircleAll(transform.position, detectionRange);
             detected = false;

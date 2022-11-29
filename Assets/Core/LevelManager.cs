@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class LevelManager : MonoBehaviour {
-    public GameObject playerPrefab;
-    // public bool paused = false;
-
+    // public GameObject playerPrefab;
 
     private PlayerControls.OverarchingActions controlMap;
     private PlayerControls.PlayerActions playerMap;
 
 
-    void Awake () {
+    void Start() {
+        Debug.Log("Level Manager Start");
+
+        // CoreManager.instance.levelManager = this;
+
         controlMap = CoreManager.instance.playerControls.Overarching;
         playerMap = CoreManager.instance.playerControls.Player;
 
@@ -19,55 +22,49 @@ public class LevelManager : MonoBehaviour {
         controlMap.Enable();
         playerMap.Enable();
 
-
-        controlMap.TogglePause.performed += (context) => {
-            
-            if (CoreManager.instance.openMenu != null) {
-                // A menu is open; game is paused
-                Resume();
-            } else {
-                Pause();
-            }
-        };
+        StartLevel(CoreManager.instance.activeDoor);
     }
 
-    public void StartLevel() {
-        Play();
+    public void StartLevel(int doorNumber) {
+        Debug.Log("Level Start!");
         // Find the player start pad in the world
         // TODO: consider using tags or labels or layers or something. IDK.
-        // Transform startPad = GameObject.Find("StartPad").GetComponent<Transform>();
+        GameObject[] doorObjects = GameObject.FindGameObjectsWithTag(Constants.DoorTag);
+
+        CinemachineVirtualCamera vcam = CoreManager.instance.vcamera;
+        CinemachineConfiner2D vcamConfiner = vcam.gameObject.GetComponent<CinemachineConfiner2D>();
 
 
         // Spawn the player at start pad
-        // Instantiate(playerPrefab, startPad.position, Quaternion.identity);
+        foreach(GameObject doorObject in doorObjects) {
+            Door door = doorObject.GetComponent<Door>();
+            if (door.doorNumber == doorNumber) {
+                GameObject player = Instantiate(CoreManager.instance.playerPrefab, doorObject.transform.position + new Vector3(2.5f,0,0), Quaternion.identity);
+
+                vcam.Follow = player.transform;
+                
+                GameObject[] monsters = GameObject.FindGameObjectsWithTag(Constants.MonsterTag);
+                foreach(GameObject monster in monsters) {
+                    try {
+                        monster.GetComponent<GhostMonsterMovement>().player = player.transform;
+                    } catch {}
+                }
+            }
+        }
+
+        GameObject levelConfiner = GameObject.FindWithTag(Constants.LevelConfinerTag);
+
+        if (vcamConfiner == null) {
+            Debug.Log("Huh this is bad");
+        } else if (levelConfiner == null) {
+            Debug.Log("No Level Confiner");
+        }
+        vcamConfiner.m_BoundingShape2D = levelConfiner.GetComponent<Collider2D>();
+
         
         // Start enemies, any other world components
+        CoreManager.instance.Play();
     }
 
-    public void Pause() {
-        // this.paused = true;
-        // disable any movement input
-        PauseInput();
-        Time.timeScale = 0;
-        CoreManager.instance.LoadMenu(Constants.PauseMenuScene);
-        // poke scene_manager.menu_manager
-    }
-
-    public void OpenPotionScreen() {
-        CoreManager.instance.LoadMenu(Constants.PotionScene);
-        PauseInput();
-    }
-
-    public void PauseInput() {
-        this.playerMap.Disable();
-    }
     
-    public void Play() {
-        this.playerMap.Enable();
-        Time.timeScale = 1;
-    }
-    public void Resume() {
-        CoreManager.instance.UnloadMenu(CoreManager.instance.openMenu);
-        Play();
-    }
 }

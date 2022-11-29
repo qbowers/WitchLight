@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Monster
   - Distraction
+  - Door
+  - PlayerCam
+  - LevelConfiner
   layers:
   - Default
   - TransparentFX
