@@ -10,16 +10,20 @@ public class ItemActionsController : MonoBehaviour {
     private PlayerControls playerControls;
     private Inventory inv;
     public ItemAction[] actions;
+    private Action<InputAction.CallbackContext>[] callbacks;
 
     void Start() {
         inv = CoreManager.instance.inventory;
         playerControls = CoreManager.instance.playerControls;
         playerMap = playerControls.Player;
+
+        callbacks = new Action<InputAction.CallbackContext>[actions.Length];
         
         for (int i = 0; i < actions.Length; i++) {
             ItemAction action = actions[i];
             InputAction playerMapAction = playerControls.FindAction(action.bindingName, false);
-            playerMapAction.performed += formatActionFunc(action);
+            callbacks[i] = formatActionFunc(action);
+            playerMapAction.performed += callbacks[i];
         }
     }
 
@@ -30,5 +34,14 @@ public class ItemActionsController : MonoBehaviour {
                 action.perform();
             }
         };
+    }
+
+    void OnDestroy()
+    {
+        for (int i = 0; i < actions.Length; i++) {
+            ItemAction action = actions[i];
+            InputAction playerMapAction = playerControls.FindAction(action.bindingName, false);
+            playerMapAction.performed -= callbacks[i];
+        }
     }
 }
