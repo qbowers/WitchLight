@@ -9,6 +9,11 @@ public class MenuManager : MonoBehaviour {
     // instantiated with each menu scene; there may be more than one of these in the world
     // Refers to CoreManager singleton, of which there will only be one
 
+
+    void Start() {
+        CoreManager.instance.openMenu = gameObject.scene.name;
+    }
+
     public void Restart() {
         CoreManager.instance.RestartLevel();
     }
@@ -22,11 +27,7 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void Resume() {
-        CoreManager.instance.Resume();
-    }
-    public void Pause() {
-        CoreManager.instance.LoadMenu(Constants.PauseMenuScene, LoadSceneMode.Additive);
-        CoreManager.instance.Pause();
+        CoreManager.instance.levelManager.Resume();
     }
 
     public void LoadLevel() {

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class Inventory : MonoBehaviour {
-    public Dictionary<string, int> inv = new Dictionary<string, int>();
+    public UDictionary<string, int> inv = new UDictionary<string, int>();
     public UDictionary<string, TextMeshProUGUI> invUI = new UDictionary<string, TextMeshProUGUI>();
 
     public int getItemCnt(string item) {

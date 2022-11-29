@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Collector : MonoBehaviour {
-    public Inventory inventory;
-    void Awake() {
-        if (inventory == null) {
-            this.inventory = GetComponent<Inventory>();
-        } 
+    private Inventory inventory;
+    
+    void Start() {
+        this.inventory = CoreManager.instance.inventory; 
     }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         Collectable item = collision.GetComponent<Collectable>();
         

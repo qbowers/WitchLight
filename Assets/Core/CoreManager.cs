@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
@@ -9,9 +10,11 @@ public class CoreManager : MonoBehaviour {
     public static CoreManager instance = null;
 
     
-    public string openLevel = Constants.LevelOne; 
+    [NonSerialized] public string openLevel = Constants.LevelOne;
+    [NonSerialized] public string openMenu = null;
 
     public LevelManager levelManager;
+    public Inventory inventory;
     public PlayerControls playerControls;
     public PlayerControls.OverarchingActions controlMap;
     public PlayerControls.PlayerActions playerMap;
@@ -50,6 +53,7 @@ public class CoreManager : MonoBehaviour {
 
         this.camera = transform.Find("Main Camera").gameObject;
         this.levelManager = FindOrCreate<LevelManager>();
+        this.inventory = FindOrCreate<Inventory>();
     }
 
     public T FindOrCreate<T>() where T:Component {
@@ -63,7 +67,6 @@ public class CoreManager : MonoBehaviour {
         return component;
     } 
 
-
     public void LoadLevel(string levelName, bool additive = false) {
         // if level systems don't exist, load them
         if (additive) SceneManager.LoadScene(Constants.LevelSystemsScene, LoadSceneMode.Additive);
@@ -76,13 +79,6 @@ public class CoreManager : MonoBehaviour {
         this.openLevel = levelName;
     }
 
-    public void UnloadAllMenus() {
-        foreach (string name in Constants.Menus) {
-            Debug.Log("Killing menu:");
-            Debug.Log(name);
-            SceneManager.UnloadSceneAsync(name);
-        }
-    }
     public void UnloadLevel() {
         SceneManager.UnloadSceneAsync(Constants.LevelSystemsScene);
         SceneManager.UnloadSceneAsync(this.openLevel);
@@ -91,23 +87,26 @@ public class CoreManager : MonoBehaviour {
         LoadLevel(this.openLevel);
     }
 
-
     public void LoadMenu(string menuName, LoadSceneMode mode = LoadSceneMode.Additive) {
         SceneManager.LoadScene(menuName, mode);
+        // the spawned menu manager will set openMenu to its scene
+        // this.openMenu = menuName;
     }
+
     public void UnloadMenu(string menuName) {
-        SceneManager.UnloadSceneAsync(menuName);
+        SceneManager.UnloadScene(menuName);
+        this.openMenu = null;
     }
 
-    public void Pause() {
-        this.levelManager.Pause();
-        LoadMenu(Constants.PauseMenuScene);
-    }
+    // public void Pause() {
+    //     this.levelManager.Pause();
+    //     LoadMenu(Constants.PauseMenuScene);
+    // }
 
-    public void Resume() {
-        // TODO: unload pause menu
-        this.levelManager.Resume();
-    }
+    // public void Resume() {
+    //     // TODO: unload pause menu
+    //     this.levelManager.Resume();
+    // }
 
     public void ExitGame() {
         // do any required cleanup

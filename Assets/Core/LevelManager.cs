@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
     public GameObject playerPrefab;
-    public bool paused = false;
+    // public bool paused = false;
 
 
     private PlayerControls.OverarchingActions controlMap;
@@ -15,7 +15,6 @@ public class LevelManager : MonoBehaviour {
         controlMap = CoreManager.instance.playerControls.Overarching;
         playerMap = CoreManager.instance.playerControls.Player;
 
-        Debug.Log(playerMap.Move);
 
         controlMap.Enable();
         playerMap.Enable();
@@ -23,8 +22,14 @@ public class LevelManager : MonoBehaviour {
 
         controlMap.TogglePause.performed += (context) => {
             
-            if (!this.paused) Pause();
-            else Resume();
+            if (CoreManager.instance.openMenu != null) {
+                // A menu is open; game is paused
+                Debug.Log(null);
+                Debug.Log(CoreManager.instance.openMenu);
+                Resume();
+            } else {
+                Pause();
+            }
         };
     }
 
@@ -42,30 +47,29 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void Pause() {
-        Debug.Log("Pause!");
-        this.paused = true;
+        // this.paused = true;
         // disable any movement input
-        this.playerMap.Disable();
+        PauseInput();
         Time.timeScale = 0;
         CoreManager.instance.LoadMenu(Constants.PauseMenuScene);
         // poke scene_manager.menu_manager
     }
 
-    public void PauseInput()
-    {
-        Debug.Log("Pausing input");
+    public void OpenPotionScreen() {
+        CoreManager.instance.LoadMenu(Constants.PotionScene);
+        PauseInput();
+    }
+
+    public void PauseInput() {
         this.playerMap.Disable();
     }
     
     public void Play() {
-        Debug.Log("UnPause!");
-        this.paused = false;
         this.playerMap.Enable();
         Time.timeScale = 1;
     }
     public void Resume() {
+        CoreManager.instance.UnloadMenu(CoreManager.instance.openMenu);
         Play();
-        CoreManager.instance.UnloadMenu(Constants.PauseMenuScene);
-        // enable movement input
     }
 }
