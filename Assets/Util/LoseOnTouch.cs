@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LoseOnTouch : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.name != "Player") {
+        if (other.gameObject.name != "Player" || other.gameObject.GetComponent<CharacterMovement>().isImmune) {
             return;
         }
 

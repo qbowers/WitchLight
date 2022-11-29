@@ -595,6 +595,7 @@ MonoBehaviour:
   unstirRatio: 0.5
   recipes:
   - {fileID: 11400000, guid: 403ef953ccdbc4be7a2e9fcd865d121d, type: 2}
+  - {fileID: 11400000, guid: 56f31253726dc4fa9a903e86dec20955, type: 2}
 --- !u!1 &846714465
 GameObject:
   m_ObjectHideFlags: 0

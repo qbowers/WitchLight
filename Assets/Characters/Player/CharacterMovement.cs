@@ -38,6 +38,7 @@ public class CharacterMovement : MonoBehaviour
     [Header("Current State")]
     public bool onGround;
     public bool pressingKey;
+    public bool isImmune;
 
     private void Awake()
     {
@@ -67,6 +68,7 @@ public class CharacterMovement : MonoBehaviour
         {
             transform.localScale = new Vector3(directionX > 0 ? 1 : -1, 1, 1);
             pressingKey = true;
+            lastFacing = directionX;
         }
         else
         {

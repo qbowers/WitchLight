@@ -9,4 +9,9 @@ public class Recipe : ScriptableObject {
     public Color potionColor;
     public ItemType[] ingredients;
     public float successfulStirTime; // how long until you succeed?
+
+    public void OnValidate()
+    {
+        if (successfulStirTime <= 0) Debug.LogWarning("Stir time for potion " + potionName.ToString() + " is too small");
+    }
 }

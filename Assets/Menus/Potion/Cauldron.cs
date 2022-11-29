@@ -41,7 +41,7 @@ public class Cauldron : MonoBehaviour {
         if ((ingredient.transform.position - transform.position).magnitude < validDropDistance) {
             addedIngredients.Add(ingredient.ingredientType);
             Destroy(ingredient.gameObject);
-            Debug.Log(string.Join(", ", addedIngredients));
+            // Debug.Log(string.Join(", ", addedIngredients));
 
             trashButton.gameObject.SetActive(true);
 
@@ -54,7 +54,7 @@ public class Cauldron : MonoBehaviour {
     private void CheckAgainstRecipes() {
         foreach (Recipe r in recipes) {
             if (addedIngredients.SequenceEqual(r.ingredients)) {
-                Debug.Log("Recipe made! Ready to stir " + r.potionName);
+                // Debug.Log("Recipe made! Ready to stir " + r.potionName);
                 stirButton.gameObject.SetActive(true);
                 currentRecipe = r;
 
@@ -110,7 +110,7 @@ public class Cauldron : MonoBehaviour {
 
             // check if we've been stirring for long enough
             if (stirTime >= currentRecipe.successfulStirTime) {
-                Debug.Log("Finished stirring!");
+                // Debug.Log("Finished stirring!");
 
                 brewingManager.CreatePotion(currentRecipe);
                 

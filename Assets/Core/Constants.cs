@@ -16,12 +16,13 @@ public class Constants {
 
     public const string mouseAimBinding = "FPS_player";
     public const string keyboardAimBinding = "Platformer_player";
+
 }
 
 public enum ItemType {
-    // ingredients
+    // add new things at the END of this list unless you're prepared to bugfix every inspector ItemType drawer
     BLUE_FLOWER,
-    // potions
+    FROG_LEG,
     DOUBLE_JUMP,
-    
+    DASH
 }
