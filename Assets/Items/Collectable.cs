@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour {
-    public string id;
+    public ItemType id;
     public int cnt;
 }

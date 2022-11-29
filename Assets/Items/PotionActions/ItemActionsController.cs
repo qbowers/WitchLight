@@ -8,10 +8,11 @@ public class ItemActionsController : MonoBehaviour {
 
     private PlayerControls.PlayerActions playerMap;
     private PlayerControls playerControls;
-    public Inventory inv;
+    private Inventory inv;
     public ItemAction[] actions;
 
     void Start() {
+        inv = CoreManager.instance.inventory;
         playerControls = CoreManager.instance.playerControls;
         playerMap = playerControls.Player;
         

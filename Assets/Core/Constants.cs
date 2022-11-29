@@ -18,10 +18,9 @@ public class Constants {
     public const string keyboardAimBinding = "Platformer_player";
 }
 
-public enum IngredientType {
-    BLUE_FLOWER
-}
-
-public enum PotionType {
-    FIRE_BREATH
+public enum ItemType {
+    // ingredients
+    BLUE_FLOWER,
+    // potions
+    DOUBLE_JUMP
 }

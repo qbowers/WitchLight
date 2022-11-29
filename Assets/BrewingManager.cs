@@ -13,9 +13,10 @@ public class BrewingManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
 
+        // TODO: generalize this in some nice loop through all inventory objects or smth
 
         // Get number of blue flowers from the inventory
-        int numFlowers = CoreManager.instance.inventory.getItemCnt("Flower");
+        int numFlowers = CoreManager.instance.inventory.getItemCnt(ItemType.BLUE_FLOWER);
         // int numFlowers = 2;
 
         // add this many flowers to scene
@@ -23,27 +24,36 @@ public class BrewingManager : MonoBehaviour {
             DraggableIngredient ingredientObject = Instantiate(ingredientPrefab, ingredientShelf);
 
             ingredientObject.cauldron = cauldron;
-            ingredientObject.ingredientType = IngredientType.BLUE_FLOWER;
+            ingredientObject.ingredientType = ItemType.BLUE_FLOWER;
         }
 
         // same for potions
-        int numPotions = CoreManager.instance.inventory.getItemCnt("Potion");
-        // int numPotions = 2;
+        int numPotions = CoreManager.instance.inventory.getItemCnt(ItemType.DOUBLE_JUMP);
+
         for (int i = 0; i < numPotions; i++) {
             Instantiate(potionPrefab, potionShelf);
+            // TODO: set data for potion (once we have >1 potion)
         }
 
         FormatShelf(ingredientShelf);
         // FormatShelf(potionShelf);
-
     }
 
 
-    public void CreatePotion(PotionType potion) {
+    public void CreatePotion(Recipe recipe) {
+        var inventory = CoreManager.instance.inventory; // readability
+
+        // lose ingredients
+        foreach (ItemType ingredient in recipe.ingredients)
+        {
+            inventory.inv[ingredient].count--;
+        }
+        
+        // gain potion
         Instantiate(potionPrefab, potionShelf);
         
-        int prevPotions = CoreManager.instance.inventory.getItemCnt("Potion");
-        CoreManager.instance.inventory.inv["Potion"] = prevPotions + 1;
+        // int prevPotions = inventory.getItemCnt(recipe.potionName);
+        inventory.inv[recipe.potionName].count++;// = prevPotions + 1;
     }
 
     void FormatShelf(Transform transform) {

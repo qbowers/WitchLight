@@ -69,10 +69,7 @@ public class CharacterJuice : MonoBehaviour
     }
 
     private void tiltCharacter() {
-        return;
-
-
-
+        /*
         //See which direction the character is currently running towards, and tilt in that direction
         float directionToTilt = 0;
         if (moveScript.velocity.x != 0) {
@@ -84,12 +81,11 @@ public class CharacterJuice : MonoBehaviour
 
         //And then rotate the character in that direction
         myAnimator.transform.rotation = Quaternion.RotateTowards(myAnimator.transform.rotation, Quaternion.Euler(-targetRotVector), tiltSpeed * Time.deltaTime);
+        */
     }
 
     private void checkForLanding() {
-        return;
-
-
+        /* 
         if (!playerGrounded && jumpScript.onGround) {
             //By checking for this, and then immediately setting playerGrounded to true, we only run this code once when the player hits the ground 
             playerGrounded = true;
@@ -113,7 +109,7 @@ public class CharacterJuice : MonoBehaviour
             // Player has left the ground, so stop playing the running particles
             playerGrounded = false;
             moveParticles.Stop();
-        }
+        } */
     }
 
     // private void checkForGoingPastJumpLine()
@@ -131,9 +127,7 @@ public class CharacterJuice : MonoBehaviour
     // }
 
     public void jumpEffects() {
-        return;
-
-
+    /* 
         //Play these effects when the player jumps, courtesy of jump script
         myAnimator.ResetTrigger("Landed");
         myAnimator.SetTrigger("Jump");
@@ -148,13 +142,12 @@ public class CharacterJuice : MonoBehaviour
 
         }
 
-        jumpParticles.Play();
+        jumpParticles.Play(); */
     }
 
     IEnumerator JumpSqueeze(float xSqueeze, float ySqueeze, float seconds, float dropAmount, bool jumpSqueeze) {
         yield break;
-
-
+        /* 
         //We log that the player is squashing/stretching, so we don't do these calculations more than once
         if (jumpSqueeze) { jumpSqueezing = true; }
         else { landSqueezing = true; }
@@ -187,6 +180,6 @@ public class CharacterJuice : MonoBehaviour
 
         if (jumpSqueeze) { jumpSqueezing = false; }
         else { landSqueezing = false; }
+    */
     }
-
 }

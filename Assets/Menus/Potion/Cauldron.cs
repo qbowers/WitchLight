@@ -20,7 +20,7 @@ public class Cauldron : MonoBehaviour {
     public List<Recipe> recipes;
 
     // adding ingredients
-    private List<IngredientType> addedIngredients;
+    private List<ItemType> addedIngredients;
     private Recipe currentRecipe;
 
     // stirring
@@ -29,7 +29,7 @@ public class Cauldron : MonoBehaviour {
     private float stirTime = 0;
 
     public void Start() {
-        addedIngredients = new List<IngredientType>();
+        addedIngredients = new List<ItemType>();
         stirButton.gameObject.SetActive(false);
         trashButton.gameObject.SetActive(false);
     }
@@ -112,11 +112,8 @@ public class Cauldron : MonoBehaviour {
             if (stirTime >= currentRecipe.successfulStirTime) {
                 Debug.Log("Finished stirring!");
 
-                // TODO: get potion type from recipe
-                // TODO: store recipes somewhere better. Definitely This should be a scriptable object
-                brewingManager.CreatePotion(PotionType.FIRE_BREATH);
-                // var newPotion = Instantiate(potionPrefab, potionShelf);
-                // newPotion.Set(currentRecipe.potionName, e.potionColor);
+                brewingManager.CreatePotion(currentRecipe);
+                
                 // reset
                 addedIngredients.Clear();
                 stirButton.gameObject.SetActive(false);

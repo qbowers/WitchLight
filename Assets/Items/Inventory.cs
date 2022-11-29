@@ -1,53 +1,62 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class Inventory : MonoBehaviour {
-    public UDictionary<string, int> inv = new UDictionary<string, int>();
-    public UDictionary<string, TextMeshProUGUI> invUI = new UDictionary<string, TextMeshProUGUI>();
 
-    public int getItemCnt(string item) {
+    [Serializable]
+    public class InvItem {
+        [Tooltip("Leave blank, this will be linked by InventoryPanel")]
+        public TextMeshProUGUI textbox;
+
+        public Sprite image;
+
+        private int _count = 0;
+        public int count { 
+            get { return _count; } 
+            set { _count = value; UpdateText(); } // this automatically calls UpdateText any time the variable is set
+        }
+
+        public void UpdateText() {
+            textbox.text = count.ToString();
+        }
+    }
+
+    public UDictionary<ItemType, InvItem> inv = new UDictionary<ItemType, InvItem>();
+
+    public int getItemCnt(ItemType item) {
         if (inv.ContainsKey(item)) {
-            return inv[item];
+            return inv[item].count;
         }
         return 0;
     }
 
+    // called by Collector monobehaviour
     public void collectInv(Collectable item) {
-        
         int cnt = getItemCnt(item.id);
-        inv[item.id] = cnt + item.cnt;
-        Debug.Log(inv[item.id]+ " " + item.id + " in inv");
-        changeInvUI(item.id);
-    
+        inv[item.id].count = cnt + item.cnt;
+        Debug.Log(inv[item.id].count + " " + item.id + " in inv");    
     }
 
-    public bool enough(string costName, int costCnt) {
+    public bool enough(ItemType costName, int costCnt) {
         if (costCnt == 0){
             return true;
         }
-        if(inv.ContainsKey(costName) && inv[costName] >= costCnt){
+        if(inv.ContainsKey(costName) && inv[costName].count >= costCnt){
             return true;
         }
         return false;
     }
 
-    public void actionCosts(UDictionary<string, int> costs){
+    public void actionCosts(UDictionary<ItemType, int> costs){
         foreach(var item in costs){
-            string costName = item.Key;
+            ItemType costName = item.Key;
             int costCnt = item.Value;
             if (costCnt != 0) {
-                inv[costName] -= costCnt;
-                changeInvUI(costName);
+                inv[costName].count -= costCnt;
             }
-        }
-    }
-
-    public void changeInvUI(string id) {
-        if (invUI.ContainsKey(id)) {
-                //increase txt cnt
-                invUI[id].text = inv[id].ToString();
         }
     }
 }

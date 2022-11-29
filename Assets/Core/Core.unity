@@ -209,7 +209,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1100.64
+  far clip plane: 1000
   field of view: 60
   orthographic: 1
   orthographic size: 7.42
@@ -236,7 +236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473668482}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.746948, y: -6.0098996, z: -10}
+  m_LocalPosition: {x: 21.56676, y: -25.822948, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
-  inventory: {fileID: 0}
+  inventory: {fileID: 549782498}
   camera: {fileID: 0}
   bindingGroupFilter: FPS_player
 --- !u!114 &549782496
@@ -354,13 +354,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inv:
-    keys:
-    - Flower
-    - Potion
-    values: 0500000002000000
-  invUI:
-    keys: []
-    values: []
+    keys: 0000000001000000
+    values:
+    - textbox: {fileID: 0}
+      image: {fileID: 21300000, guid: 05c42695fe03acf48824761e84ad79e8, type: 3}
+    - textbox: {fileID: 0}
+      image: {fileID: 21300000, guid: cf4e67c0a35567a438b5c90d5474c087, type: 3}
 --- !u!1 &707566740
 GameObject:
   m_ObjectHideFlags: 0

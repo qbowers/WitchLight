@@ -7,8 +7,8 @@ public class IngredientShelf : MonoBehaviour {
     
     private GridLayoutGroup grid;
 
-    public void RefundIngredients(Cauldron cauldron, List<IngredientType> ingredients) {
-        foreach(IngredientType ingredient in ingredients) {
+    public void RefundIngredients(Cauldron cauldron, List<ItemType> ingredients) {
+        foreach(ItemType ingredient in ingredients) {
             DraggableIngredient ingredientObject = Instantiate(ingredientPrefab, transform);
             ingredientObject.cauldron = cauldron;
             ingredientObject.ingredientType = ingredient;

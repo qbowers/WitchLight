@@ -594,10 +594,7 @@ MonoBehaviour:
   refundTrashedIngredients: 1
   unstirRatio: 0.5
   recipes:
-  - potionName: fire breath
-    potionColor: {r: 0.6792453, g: 0.07369172, b: 0.07369172, a: 1}
-    ingredients: 0000000000000000
-    successfulStirTime: 4
+  - {fileID: 11400000, guid: 403ef953ccdbc4be7a2e9fcd865d121d, type: 2}
 --- !u!1 &846714465
 GameObject:
   m_ObjectHideFlags: 0

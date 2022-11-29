@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(EventTrigger))]
 public class DraggableIngredient : MonoBehaviour {
-    public IngredientType ingredientType;
+    public ItemType ingredientType;
     [HideInInspector] public Cauldron cauldron;
 
     private Vector3 snapBackPosition;

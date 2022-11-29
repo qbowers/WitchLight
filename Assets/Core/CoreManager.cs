@@ -88,13 +88,13 @@ public class CoreManager : MonoBehaviour {
     }
 
     public void LoadMenu(string menuName, LoadSceneMode mode = LoadSceneMode.Additive) {
-        SceneManager.LoadScene(menuName, mode);
+        SceneManager.LoadSceneAsync(menuName, mode);
         // the spawned menu manager will set openMenu to its scene
         // this.openMenu = menuName;
     }
 
     public void UnloadMenu(string menuName) {
-        SceneManager.UnloadScene(menuName);
+        SceneManager.UnloadSceneAsync(menuName);
         this.openMenu = null;
     }
 
