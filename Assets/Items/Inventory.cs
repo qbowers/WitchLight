@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// using UnityEditor;
 using TMPro;
 
 public class Inventory : MonoBehaviour {
@@ -9,11 +10,11 @@ public class Inventory : MonoBehaviour {
     [Serializable]
     public class InvItem {
         [Tooltip("Leave blank, this will be linked by InventoryPanel")]
-        public TextMeshProUGUI textbox;
+        [NonSerialized] public TextMeshProUGUI textbox;
 
         public Sprite image;
 
-        private int _count = 0;
+        [SerializeField] private int _count = 0;
         public int count { 
             get { return _count; } 
             set { _count = value; UpdateText(); } // this automatically calls UpdateText any time the variable is set

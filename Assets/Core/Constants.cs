@@ -22,5 +22,6 @@ public enum ItemType {
     // ingredients
     BLUE_FLOWER,
     // potions
-    DOUBLE_JUMP
+    DOUBLE_JUMP,
+    
 }

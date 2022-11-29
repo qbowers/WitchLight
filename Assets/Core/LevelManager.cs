@@ -24,8 +24,6 @@ public class LevelManager : MonoBehaviour {
             
             if (CoreManager.instance.openMenu != null) {
                 // A menu is open; game is paused
-                Debug.Log(null);
-                Debug.Log(CoreManager.instance.openMenu);
                 Resume();
             } else {
                 Pause();

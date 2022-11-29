@@ -10,14 +10,17 @@ public class BrewingManager : MonoBehaviour {
 
     public DraggableIngredient ingredientPrefab;
     public GameObject potionPrefab;
+
+    Inventory inventory;
     // Start is called before the first frame update
     void Start() {
+
+        inventory = CoreManager.instance.inventory;
 
         // TODO: generalize this in some nice loop through all inventory objects or smth
 
         // Get number of blue flowers from the inventory
-        int numFlowers = CoreManager.instance.inventory.getItemCnt(ItemType.BLUE_FLOWER);
-        // int numFlowers = 2;
+        int numFlowers = inventory.getItemCnt(ItemType.BLUE_FLOWER);
 
         // add this many flowers to scene
         for (int i = 0; i < numFlowers; i++) {
@@ -28,7 +31,7 @@ public class BrewingManager : MonoBehaviour {
         }
 
         // same for potions
-        int numPotions = CoreManager.instance.inventory.getItemCnt(ItemType.DOUBLE_JUMP);
+        int numPotions = inventory.getItemCnt(ItemType.DOUBLE_JUMP);
 
         for (int i = 0; i < numPotions; i++) {
             Instantiate(potionPrefab, potionShelf);
@@ -41,19 +44,15 @@ public class BrewingManager : MonoBehaviour {
 
 
     public void CreatePotion(Recipe recipe) {
-        var inventory = CoreManager.instance.inventory; // readability
 
         // lose ingredients
-        foreach (ItemType ingredient in recipe.ingredients)
-        {
+        foreach (ItemType ingredient in recipe.ingredients) {
             inventory.inv[ingredient].count--;
         }
         
         // gain potion
         Instantiate(potionPrefab, potionShelf);
-        
-        // int prevPotions = inventory.getItemCnt(recipe.potionName);
-        inventory.inv[recipe.potionName].count++;// = prevPotions + 1;
+        inventory.inv[recipe.potionName].count++;
     }
 
     void FormatShelf(Transform transform) {
