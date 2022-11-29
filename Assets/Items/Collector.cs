@@ -6,7 +6,7 @@ public class Collector : MonoBehaviour {
     private Inventory inventory;
     
     void Start() {
-        this.inventory = CoreManager.instance.inventory; 
+        this.inventory = CoreManager.instance.inventory;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

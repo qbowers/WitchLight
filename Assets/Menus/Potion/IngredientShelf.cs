@@ -7,18 +7,11 @@ public class IngredientShelf : MonoBehaviour {
     
     private GridLayoutGroup grid;
 
-    // Start is called before the first frame update
-    public void Start() {
-        grid = GetComponent<GridLayoutGroup>();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
-        grid.enabled = false;
-    }
-
-    public void RefundIngredients(Cauldron cauldron, List<Ingredient> ingredients) {
-        foreach(Ingredient i in ingredients) {
-            DraggableIngredient ingredient = Instantiate(ingredientPrefab, transform);
-            ingredient.cauldron = cauldron;
-            ingredient.ingredientName = i;
+    public void RefundIngredients(Cauldron cauldron, List<IngredientType> ingredients) {
+        foreach(IngredientType ingredient in ingredients) {
+            DraggableIngredient ingredientObject = Instantiate(ingredientPrefab, transform);
+            ingredientObject.cauldron = cauldron;
+            ingredientObject.ingredientType = ingredient;
         }
         // force layout rebuild
         grid.enabled = true;

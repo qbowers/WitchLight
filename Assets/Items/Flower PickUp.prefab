@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8592022279805258651}
   - component: {fileID: 8592022279805258652}
   m_Layer: 0
-  m_Name: Flower
+  m_Name: Flower PickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Cauldron : MonoBehaviour
-{
+public class Cauldron : MonoBehaviour {
     // config inspector values
     public int validDropDistance;
     public Transform potionShelf;
@@ -13,6 +12,7 @@ public class Cauldron : MonoBehaviour
     public Button stirButton;
     public Button trashButton;
     public IngredientShelf ingredientShelf;
+    public BrewingManager brewingManager;
     public bool refundTrashedIngredients;
     // when the player should be stirring but isn't, how fast do they lose progress?
     // higher number = more punishing
@@ -20,7 +20,7 @@ public class Cauldron : MonoBehaviour
     public List<Recipe> recipes;
 
     // adding ingredients
-    private List<Ingredient> addedIngredients;
+    private List<IngredientType> addedIngredients;
     private Recipe currentRecipe;
 
     // stirring
@@ -28,21 +28,18 @@ public class Cauldron : MonoBehaviour
     private bool isStirring = false;
     private float stirTime = 0;
 
-    public void Start()
-    {
-        addedIngredients = new List<Ingredient>();
+    public void Start() {
+        addedIngredients = new List<IngredientType>();
         stirButton.gameObject.SetActive(false);
         trashButton.gameObject.SetActive(false);
     }
 
     // called by a DraggableIngredient
     // returns whether it was successfully dropped (ie is close enough)
-    public bool DropIngredient(DraggableIngredient ingredient)
-    {
+    public bool DropIngredient(DraggableIngredient ingredient) {
         // Debug.Log("DropIngredient called");
-        if ((ingredient.transform.position - transform.position).magnitude < validDropDistance)
-        {
-            addedIngredients.Add(ingredient.ingredientName);
+        if ((ingredient.transform.position - transform.position).magnitude < validDropDistance) {
+            addedIngredients.Add(ingredient.ingredientType);
             Destroy(ingredient.gameObject);
             Debug.Log(string.Join(", ", addedIngredients));
 
@@ -54,12 +51,9 @@ public class Cauldron : MonoBehaviour
         return false;
     }
 
-    private void CheckAgainstRecipes()
-    {
-        foreach (Recipe r in recipes)
-        {
-            if (addedIngredients.SequenceEqual(r.ingredients))
-            {
+    private void CheckAgainstRecipes() {
+        foreach (Recipe r in recipes) {
+            if (addedIngredients.SequenceEqual(r.ingredients)) {
                 Debug.Log("Recipe made! Ready to stir " + r.potionName);
                 stirButton.gameObject.SetActive(true);
                 currentRecipe = r;
@@ -77,10 +71,8 @@ public class Cauldron : MonoBehaviour
         stirTime = 0;
     }
 
-    public void TrashButtonOnClick()
-    {
-        if (refundTrashedIngredients)
-        {
+    public void TrashButtonOnClick() {
+        if (refundTrashedIngredients) {
             ingredientShelf.RefundIngredients(this, addedIngredients);
         }
         addedIngredients.Clear();
@@ -93,30 +85,22 @@ public class Cauldron : MonoBehaviour
         stirTime = 0;
     }
 
-    public void StirButtonOnMouseDown(BaseEventData basedata)
-    {
-        if (canStir) 
-        {
+    public void StirButtonOnMouseDown(BaseEventData basedata) {
+        if (canStir) {
             isStirring = true;
         }
     }
 
-    public void StirButtonOnMouseUpOrExit(BaseEventData basedata)
-    {
+    public void StirButtonOnMouseUpOrExit(BaseEventData basedata) {
         isStirring = false;
     }
 
-    public void Update()
-    {
-        if (canStir)
-        {
+    public void Update() {
+        if (canStir) {
             // add stir time if applicable
-            if (isStirring)
-            {
+            if (isStirring) {
                 stirTime += Time.deltaTime;
-            }
-            else
-            {
+            } else {
                 stirTime -= Time.deltaTime * unstirRatio;
                 if (stirTime < 0) stirTime = 0;
             }
@@ -125,11 +109,14 @@ public class Cauldron : MonoBehaviour
             stirButton.image.fillAmount = (stirTime / currentRecipe.successfulStirTime);
 
             // check if we've been stirring for long enough
-            if (stirTime >= currentRecipe.successfulStirTime)
-            {
+            if (stirTime >= currentRecipe.successfulStirTime) {
                 Debug.Log("Finished stirring!");
-                var newPotion = Instantiate(potionPrefab, potionShelf);
-                newPotion.Set(currentRecipe.potionName, currentRecipe.potionColor);
+
+                // TODO: get potion type from recipe
+                // TODO: store recipes somewhere better. Definitely This should be a scriptable object
+                brewingManager.CreatePotion(PotionType.FIRE_BREATH);
+                // var newPotion = Instantiate(potionPrefab, potionShelf);
+                // newPotion.Set(currentRecipe.potionName, e.potionColor);
                 // reset
                 addedIngredients.Clear();
                 stirButton.gameObject.SetActive(false);
@@ -141,5 +128,4 @@ public class Cauldron : MonoBehaviour
             }
         }
     }
-
 }
