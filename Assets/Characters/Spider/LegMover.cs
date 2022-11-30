@@ -20,12 +20,12 @@ public class LegMover : MonoBehaviour
     public LegMover opposingLeg;
     public MonsterAI monsterAI;
 
-    private Vector3 originalPos;
+    private GameObject spiderBody;
     // public AudioSource aud;
     // Start is called before the first frame update
     void Start()
     {
-        originalPos = transform.position;
+        spiderBody = gameObject.transform.parent.gameObject.transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -79,11 +79,12 @@ public class LegMover : MonoBehaviour
     public void CheckGround()
     {
         RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector3.down, groundCheckDistance, groundLayer);
-        if (hit.collider != null && monsterAI.onGround)
-        {
+        if (hit.collider != null && monsterAI.onGround){
             Vector3 point = hit.point; // gets the position where the leg hit something
-            point.y += hoverDist;
-            transform.position = point;
+            if ((spiderBody.transform.position - point).magnitude < 6f){
+                point.y += hoverDist;
+                transform.position = point;
+            }
         }
     }
 
