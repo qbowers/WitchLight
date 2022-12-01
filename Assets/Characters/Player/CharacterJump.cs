@@ -16,8 +16,8 @@ public class CharacterJump : MonoBehaviour {
     [SerializeField, Range(0.2f, 1.25f)][Tooltip("How long it takes to reach that height before coming back down")] public float timeToJumpApex;
     [SerializeField, Range(0f, 5f)][Tooltip("Gravity multiplier to apply when going up")] public float upwardMovementMultiplier = 1f;
     [SerializeField, Range(1f, 20f)][Tooltip("Gravity multiplier to apply when coming down")] public float downwardMovementMultiplier = 6.17f;
-    // [SerializeField, Range(0, 1)][Tooltip("How many times can you jump in the air?")] public int maxAirJumps = 0;
-    public int maxAirJumps => CoreManager.instance.inventory.enough(ItemType.DOUBLE_JUMP, 1) ? 1 : 0;
+    [SerializeField, Range(0, 1)][Tooltip("How many times can you jump in the air?")] public int maxAirJumps = 0;
+    // public int maxAirJumps => CoreManager.instance.inventory.enough(ItemType.DOUBLE_JUMP, 1) ? 1 : 0;
 
     [Header("Options")]
     [Tooltip("Should the character drop when you let go of jump?")] public bool variablejumpHeight;
@@ -25,7 +25,7 @@ public class CharacterJump : MonoBehaviour {
     [SerializeField][Tooltip("The fastest speed the character can fall")] public float fallSpeedLimit;
     [SerializeField, Range(0f, 0.3f)][Tooltip("How long should coyote time last?")] public float coyoteTime = 0.15f;
     [SerializeField, Range(0f, 0.3f)][Tooltip("How far from ground should we cache your jump?")] public float jumpBuffer = 0.15f;
-    public ItemAction doublejump;
+    // public ItemAction doublejump;
 
     [Header("Calculations")]
     public float jumpSpeed;
@@ -176,11 +176,11 @@ public class CharacterJump : MonoBehaviour {
             jumpBufferCounter = 0;
             coyoteTimeCounter = 0;
 
-            // if this is a double jump, use a double jump potion
-            if (canJumpAgain && !onGround) {
-                bool thismustbetrue = doublejump.cost(CoreManager.instance.inventory);
-                if (!thismustbetrue) Debug.LogWarning("Doublejump cost error");
-            }
+            // // if this is a double jump, use a double jump potion
+            // if (canJumpAgain && !onGround) {
+            //     bool thismustbetrue = doublejump.cost(CoreManager.instance.inventory);
+            //     if (!thismustbetrue) Debug.LogWarning("Doublejump cost error");
+            // }
 
             //If we have double jump on, allow us to jump again (but only once)
             // if canJumpAgain was previously false and air jumps allowed, now canJumpAgain is true. otherwise false.

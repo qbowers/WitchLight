@@ -116,6 +116,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BigJump"",
+                    ""type"": ""Button"",
+                    ""id"": ""25830aae-a98e-49ad-b2a5-1d1320567462"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -426,6 +435,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81e09ac4-11e7-40eb-9789-f70096551dbc"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""FPS_player"",
+                    ""action"": ""BigJump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -500,6 +520,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
+        m_Player_BigJump = m_Player.FindAction("BigJump", throwIfNotFound: true);
         // Overarching
         m_Overarching = asset.FindActionMap("Overarching", throwIfNotFound: true);
         m_Overarching_TogglePause = m_Overarching.FindAction("TogglePause", throwIfNotFound: true);
@@ -572,6 +593,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Throw;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Escape;
+    private readonly InputAction m_Player_BigJump;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -586,6 +608,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Throw => m_Wrapper.m_Player_Throw;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
+        public InputAction @BigJump => m_Wrapper.m_Player_BigJump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -625,6 +648,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Escape.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
                 @Escape.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
                 @Escape.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                @BigJump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBigJump;
+                @BigJump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBigJump;
+                @BigJump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBigJump;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -659,6 +685,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Escape.started += instance.OnEscape;
                 @Escape.performed += instance.OnEscape;
                 @Escape.canceled += instance.OnEscape;
+                @BigJump.started += instance.OnBigJump;
+                @BigJump.performed += instance.OnBigJump;
+                @BigJump.canceled += instance.OnBigJump;
             }
         }
     }
@@ -726,6 +755,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnThrow(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
+        void OnBigJump(InputAction.CallbackContext context);
     }
     public interface IOverarchingActions
     {

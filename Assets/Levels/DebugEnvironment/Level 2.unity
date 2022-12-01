@@ -26290,7 +26290,9 @@ MonoBehaviour:
   costs:
     keys: 02000000
     values: 01000000
-  bindingName: Jump
+  bindingName: BigJump
+  jumpHeight: 50
+  allowWhileJumping: 1
 --- !u!114 &1802973725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26324,6 +26326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - {fileID: 1802973725}
+  - {fileID: 1802973711}
 --- !u!1 &1844618175
 GameObject:
   m_ObjectHideFlags: 0
