@@ -7,7 +7,6 @@ public class MonsterAI : MonoBehaviour
 {
     // Start is called before the first frame update
     public Transform target;
-
     public float speed = 20f;
     public float airSpeed = 40f;
     public float jumpForce = 20f;
@@ -17,6 +16,8 @@ public class MonsterAI : MonoBehaviour
     public float jumpDelay = 0.05f;
     public float jumpDelayCounter = 0;
     public float nextWaypointDistance = 3f;
+    public bool alwaysDetect;
+    public float detectionRange;
 
     private Path path;
     private int currentWaypoint = 0;
@@ -29,6 +30,7 @@ public class MonsterAI : MonoBehaviour
     private Rigidbody2D rb;
     private MonsterGround ground;
     private SpiderBrain spiderBrain;
+    private bool detected;
     void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -58,39 +60,39 @@ public class MonsterAI : MonoBehaviour
     private void MonsterMovement(Vector2 direction)
     {
         onGround = ground.GetOnGround();
+        detected = detect();
+        if (detected){
+            // Get velocity of monster
+            velocity = rb.velocity;
+            // Only creates force in x direction
+            Vector2 forceX = direction * 50f;
+            forceX.y = 0;
 
-        // Get velocity of monster
-        velocity = rb.velocity;
-
-        // Only creates force in x direction
-        Vector2 forceX = direction * 50f;
-        forceX.y = 0;
-
-        if (onGround)
-        {
-            spiderBrain.moveLegs = true;
-            rb.gravityScale = 0;
-            if(Mathf.Abs(rb.velocity.x) < speed){
-                rb.AddForce(forceX);
-            }
-
-            jumpDelayCounter += Time.deltaTime;
-
-            if (direction.y > jumpConstraint && jumpDelayCounter > jumpDelay) 
+            if (onGround)
             {
-                spiderBrain.moveLegs = false;
-                velocity.y = jumpForce;
-                jumpDelayCounter = 0;
-            }
-        }
-        else {
-            rb.gravityScale = 4;
-            if(Mathf.Abs(rb.velocity.x) < airSpeed){
-                rb.AddForce(forceX);
-            }
-        }
+                spiderBrain.moveLegs = true;
+                rb.gravityScale = 0;
+                if(Mathf.Abs(rb.velocity.x) < speed){
+                    rb.AddForce(forceX);
+                }
 
-        rb.velocity = velocity;
+                jumpDelayCounter += Time.deltaTime;
+
+                if (direction.y > jumpConstraint && jumpDelayCounter > jumpDelay) 
+                {
+                    spiderBrain.moveLegs = false;
+                    velocity.y = jumpForce;
+                    jumpDelayCounter = 0;
+                }
+            }
+            else {
+                rb.gravityScale = 4;
+                if(Mathf.Abs(rb.velocity.x) < airSpeed){
+                    rb.AddForce(forceX);
+                }
+            }   
+            rb.velocity = velocity;
+        }
     }
 
     // Update is called once per frame
@@ -132,5 +134,19 @@ public class MonsterAI : MonoBehaviour
         {
             currentWaypoint++;
         }
+    }
+
+    private bool detect(){
+        if (!alwaysDetect){
+            var hitColliders = Physics2D.OverlapCircleAll(transform.position, detectionRange);
+            foreach (var collider in hitColliders) {
+                if(collider.CompareTag("Player")){
+                    alwaysDetect = true;
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
     }
 }

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0384a87059e4a69aaadeaf76e24106, type: 3}
-  m_Name: RecipeFire
+  m_Name: RecipeJump
   m_EditorClassIdentifier: 
-  potionName: 1
+  potionName: 2
+  numPotionsMade: 1
   potionColor: {r: 0.7647059, g: 0.062745094, b: 0.24642123, a: 0}
   ingredients: 0000000000000000
   successfulStirTime: 2

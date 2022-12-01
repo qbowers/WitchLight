@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class BrewingManager : MonoBehaviour {
     public Cauldron cauldron;
@@ -11,35 +12,45 @@ public class BrewingManager : MonoBehaviour {
     public DraggableIngredient ingredientPrefab;
     public GameObject potionPrefab;
 
+    public MenuManager menuManager;
+
     Inventory inventory;
     // Start is called before the first frame update
     void Start() {
 
+        CoreManager.instance.playerMap.Escape.performed += OnEscapePerformed;
+
         inventory = CoreManager.instance.inventory;
 
-        // TODO: generalize this in some nice loop through all inventory objects or smth
+        foreach(var ingredient in inventory.invIng) {
+            int num = inventory.getItemCnt(ingredient.Key);
+            
+            for (int i = 0; i < num; i++) {
+                DraggableIngredient ingredientObject = Instantiate(ingredientPrefab, ingredientShelf);
 
-        // Get number of blue flowers from the inventory
-        int numFlowers = inventory.getItemCnt(ItemType.BLUE_FLOWER);
-
-        // add this many flowers to scene
-        for (int i = 0; i < numFlowers; i++) {
-            DraggableIngredient ingredientObject = Instantiate(ingredientPrefab, ingredientShelf);
-
-            ingredientObject.cauldron = cauldron;
-            ingredientObject.ingredientType = ItemType.BLUE_FLOWER;
+                ingredientObject.cauldron = cauldron;
+                ingredientObject.ingredientType = ingredient.Key;
+                ingredientObject.GetComponent<Image>().sprite = ingredient.Value.image;
+            }
         }
 
-        // same for potions
-        int numPotions = inventory.getItemCnt(ItemType.DOUBLE_JUMP);
-
-        for (int i = 0; i < numPotions; i++) {
-            Instantiate(potionPrefab, potionShelf);
-            // TODO: set data for potion (once we have >1 potion)
+        foreach(var potion in inventory.invPot) {
+            int num = inventory.getItemCnt(potion.Key);
+            for (int i = 0; i < num; i++) {
+                GameObject potionObject = Instantiate(potionPrefab, potionShelf);
+                potionObject.GetComponent<Image>().sprite = potion.Value.image;
+            }
         }
-
         FormatShelf(ingredientShelf);
-        // FormatShelf(potionShelf);
+        FormatShelf(potionShelf);
+    }
+
+    private void OnDestroy() {
+        CoreManager.instance.playerMap.Escape.performed -= OnEscapePerformed;
+    }
+
+    private void OnEscapePerformed(InputAction.CallbackContext context) {
+        menuManager.Resume();
     }
 
 
@@ -47,12 +58,16 @@ public class BrewingManager : MonoBehaviour {
 
         // lose ingredients
         foreach (ItemType ingredient in recipe.ingredients) {
-            inventory.inv[ingredient].count--;
+            inventory.invIng[ingredient].count--;
         }
         
         // gain potion
-        Instantiate(potionPrefab, potionShelf);
-        inventory.inv[recipe.potionName].count++;
+        for (int i = 0; i < recipe.numPotionsMade; i++) {
+            GameObject potionObject = Instantiate(potionPrefab, potionShelf);
+            potionObject.GetComponent<Image>().sprite = inventory.invPot[recipe.potionName].image;
+            inventory.invPot[recipe.potionName].count++;
+        }
+        FormatShelf(potionShelf);
     }
 
     void FormatShelf(Transform transform) {
