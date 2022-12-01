@@ -17035,6 +17035,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1783306787410664932, guid: 9810613a0571fc742a228a9ca1b988c1, type: 3}
+      propertyPath: doublejump
+      value: 
+      objectReference: {fileID: 1802973711}
     - target: {fileID: 3815714499491088949, guid: 9810613a0571fc742a228a9ca1b988c1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -17338,7 +17342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7356525844742012201, guid: a8f06cc8815665e4aba0ec0f67883ccb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8f06cc8815665e4aba0ec0f67883ccb, type: 3}
@@ -17657,7 +17661,7 @@ MonoBehaviour:
   costs:
     keys: 02000000
     values: 01000000
-  bindingName: Action1
+  bindingName: Jump
   jumpHeight: 50
 --- !u!114 &1802973725
 MonoBehaviour:
@@ -17691,7 +17695,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 1802973711}
   - {fileID: 1802973725}
 --- !u!1001 &1868848801
 PrefabInstance:

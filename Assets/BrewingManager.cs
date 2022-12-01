@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class BrewingManager : MonoBehaviour {
     public Cauldron cauldron;
@@ -20,8 +21,6 @@ public class BrewingManager : MonoBehaviour {
         CoreManager.instance.playerMap.Escape.performed += OnEscapePerformed;
 
         inventory = CoreManager.instance.inventory;
-
-        // TODO: generalize this in some nice loop through all inventory objects or smth
 
         foreach(var ingredient in inventory.invIng) {
             int num = inventory.getItemCnt(ingredient.Key);
@@ -51,7 +50,7 @@ public class BrewingManager : MonoBehaviour {
     }
 
     private void OnEscapePerformed(InputAction.CallbackContext context) {
-        MenuManager.Resume();
+        menuManager.Resume();
     }
 
 
@@ -63,9 +62,11 @@ public class BrewingManager : MonoBehaviour {
         }
         
         // gain potion
-        GameObject potionObject = Instantiate(potionPrefab, potionShelf);
-        potionObject.GetComponent<Image>().sprite = inventory.invPot[recipe.potionName].image;
-        inventory.invPot[recipe.potionName].count++;
+        for (int i = 0; i < recipe.numPotionsMade; i++) {
+            GameObject potionObject = Instantiate(potionPrefab, potionShelf);
+            potionObject.GetComponent<Image>().sprite = inventory.invPot[recipe.potionName].image;
+            inventory.invPot[recipe.potionName].count++;
+        }
         FormatShelf(potionShelf);
     }
 

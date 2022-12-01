@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RecipeDash
   m_EditorClassIdentifier: 
   potionName: 3
+  numPotionsMade: 2
   potionColor: {r: 0.30584726, g: 0.7710065, b: 0.8207547, a: 0}
   ingredients: 0100000001000000
   successfulStirTime: 2
