@@ -11,9 +11,13 @@ public class BrewingManager : MonoBehaviour {
     public DraggableIngredient ingredientPrefab;
     public GameObject potionPrefab;
 
+    public MenuManager menuManager;
+
     Inventory inventory;
     // Start is called before the first frame update
     void Start() {
+
+        CoreManager.instance.playerMap.Escape.performed += OnEscapePerformed;
 
         inventory = CoreManager.instance.inventory;
 
@@ -40,6 +44,14 @@ public class BrewingManager : MonoBehaviour {
         }
         FormatShelf(ingredientShelf);
         FormatShelf(potionShelf);
+    }
+
+    private void OnDestroy() {
+        CoreManager.instance.playerMap.Escape.performed -= OnEscapePerformed;
+    }
+
+    private void OnEscapePerformed(InputAction.CallbackContext context) {
+        MenuManager.Resume();
     }
 
 
