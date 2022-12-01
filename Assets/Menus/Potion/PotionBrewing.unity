@@ -846,6 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientPrefab: {fileID: 8930631170735006721, guid: 590745606f7104879ad7545ad770f234, type: 3}
+  grid: {fileID: 849257148}
 --- !u!1 &880964205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,6 +1478,7 @@ MonoBehaviour:
   potionShelf: {fileID: 569965998}
   ingredientPrefab: {fileID: 8930631170735006721, guid: 590745606f7104879ad7545ad770f234, type: 3}
   potionPrefab: {fileID: 3548422965632717975, guid: b187f9d002a4843278b0acf81406f6a6, type: 3}
+  menuManager: {fileID: 0}
 --- !u!1 &1860789067
 GameObject:
   m_ObjectHideFlags: 0
