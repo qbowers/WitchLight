@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class BrewingManager : MonoBehaviour {
     public Cauldron cauldron;
@@ -11,13 +12,15 @@ public class BrewingManager : MonoBehaviour {
     public DraggableIngredient ingredientPrefab;
     public GameObject potionPrefab;
 
+    public MenuManager menuManager;
+
     Inventory inventory;
     // Start is called before the first frame update
     void Start() {
 
-        inventory = CoreManager.instance.inventory;
+        CoreManager.instance.playerMap.Escape.performed += OnEscapePerformed;
 
-        // TODO: generalize this in some nice loop through all inventory objects or smth
+        inventory = CoreManager.instance.inventory;
 
         foreach(var ingredient in inventory.invIng) {
             int num = inventory.getItemCnt(ingredient.Key);
@@ -42,6 +45,14 @@ public class BrewingManager : MonoBehaviour {
         FormatShelf(potionShelf);
     }
 
+    private void OnDestroy() {
+        CoreManager.instance.playerMap.Escape.performed -= OnEscapePerformed;
+    }
+
+    private void OnEscapePerformed(InputAction.CallbackContext context) {
+        menuManager.Resume();
+    }
+
 
     public void CreatePotion(Recipe recipe) {
 
@@ -51,9 +62,11 @@ public class BrewingManager : MonoBehaviour {
         }
         
         // gain potion
-        GameObject potionObject = Instantiate(potionPrefab, potionShelf);
-        potionObject.GetComponent<Image>().sprite = inventory.invPot[recipe.potionName].image;
-        inventory.invPot[recipe.potionName].count++;
+        for (int i = 0; i < recipe.numPotionsMade; i++) {
+            GameObject potionObject = Instantiate(potionPrefab, potionShelf);
+            potionObject.GetComponent<Image>().sprite = inventory.invPot[recipe.potionName].image;
+            inventory.invPot[recipe.potionName].count++;
+        }
         FormatShelf(potionShelf);
     }
 

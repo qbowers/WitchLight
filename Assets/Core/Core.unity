@@ -364,9 +364,9 @@ MonoBehaviour:
     keys: 0200000003000000
     values:
     - image: {fileID: 21300000, guid: cf4e67c0a35567a438b5c90d5474c087, type: 3}
-      _count: 1
+      _count: 0
     - image: {fileID: 21300000, guid: b0b56ad00a47e714c8ae3263771413a8, type: 3}
-      _count: 1
+      _count: 0
 --- !u!1 &707566740
 GameObject:
   m_ObjectHideFlags: 0

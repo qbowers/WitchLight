@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class IngredientShelf : MonoBehaviour {
     public DraggableIngredient ingredientPrefab;
     
-    private GridLayoutGroup grid;
+    public GridLayoutGroup grid;
 
     public void RefundIngredients(Cauldron cauldron, List<ItemType> ingredients) {
         foreach(ItemType ingredient in ingredients) {

@@ -28,6 +28,15 @@ public class Inventory : MonoBehaviour {
     public UDictionary<ItemType, InvItem> invIng = new UDictionary<ItemType, InvItem>();
     public UDictionary<ItemType, InvItem> invPot = new UDictionary<ItemType, InvItem>();
 
+    public void ZeroInventory() {
+        foreach(var ing in invIng) {
+            ing.Value.count = 0;
+        }
+        foreach(var pot in invPot) {
+            pot.Value.count = 0;
+        }
+    }
+
     public int getItemCnt(ItemType item) {
         if (invIng.ContainsKey(item)) {
             return invIng[item].count;
