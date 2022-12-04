@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class WinOnTouch : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.name != "Player") {
+        if (!Utils.IsPlayer(other.gameObject)) {
             return;
         }
 

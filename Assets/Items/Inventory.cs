@@ -21,6 +21,9 @@ public class Inventory : MonoBehaviour {
         }
 
         public void UpdateText() {
+            if (textbox == null) {
+                Debug.Log("textbox does not exist");
+            }
             textbox.text = count.ToString();
         }
     }

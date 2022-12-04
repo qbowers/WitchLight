@@ -8,6 +8,8 @@ public class InventoryPanel : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         // clear children
+        Debug.Log("Create Textboxes");
+
         foreach(Transform child in transform) Destroy(child.gameObject);
 
         // create invItemPrefabs for each item in the inventory

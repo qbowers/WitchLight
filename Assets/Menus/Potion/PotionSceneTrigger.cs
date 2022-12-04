@@ -34,7 +34,7 @@ public class PotionSceneTrigger : MonoBehaviour {
     private void OnInteractPerformed(InputAction.CallbackContext context)
     {
         if (isColliding) {
-            CoreManager.instance.levelManager.OpenPotionScreen();
+            CoreManager.instance.OpenPotionScreen();
         }
     }
     

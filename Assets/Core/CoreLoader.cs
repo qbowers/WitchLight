@@ -8,15 +8,18 @@ public class CoreLoader : MonoBehaviour {
     public bool loadLevelSystems = false;
 
     void Awake() {
+        Debug.Log("CoreLoader Awake");
+
         if (CoreManager.instance == null) {
             SceneManager.LoadScene("Core", LoadSceneMode.Additive);
-
-            // Game Levels also need LevelSystems
-            if (loadLevelSystems) {
-                SceneManager.LoadScene(Constants.LevelSystemsScene, LoadSceneMode.Additive);
-            }
         }
-
         Destroy(this.gameObject);
     }
+
+    // void Start() {
+
+    //     CoreManager.instance.levelManager.StartLevel(0);
+
+    //     Destroy(this.gameObject);
+    // }
 }
