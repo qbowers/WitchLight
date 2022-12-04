@@ -23,6 +23,9 @@ GameObject:
   - component: {fileID: 7197268818595974994}
   - component: {fileID: 1485469902274333949}
   - component: {fileID: 7197268818595974951}
+  - component: {fileID: 1802973711}
+  - component: {fileID: 1802973725}
+  - component: {fileID: 1802973726}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -71,7 +74,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.6}
+  m_Size: {x: 0.6, y: 1.57}
   m_EdgeRadius: 0.2
 --- !u!50 &3815714499491088951
 Rigidbody2D:
@@ -4843,7 +4846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac75af4c626de37498e6ea6749834129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLength: 0.95
+  groundLength: 1.13
   colliderOffset: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
@@ -4903,7 +4906,7 @@ MonoBehaviour:
   fallSpeedLimit: 20
   coyoteTime: 0.15
   jumpBuffer: 0.15
-  doublejump: {fileID: 7197268818595974994}
+  doublejump: {fileID: 1802973711}
   jumpSpeed: 0
   gravMultiplier: 0
   canJumpAgain: 0
@@ -4925,7 +4928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf9d1d7e51c54a4ca22d33bb2d13938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 7
+  maxSpeed: 10
   maxAcceleration: 52
   maxDecceleration: 52
   maxTurnSpeed: 80
@@ -5039,7 +5042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f176c5911b3834fb615d2bc00f94e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autocollect: 0
+  autocollect: 1
 --- !u!114 &7197268818595974994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5090,6 +5093,55 @@ MonoBehaviour:
   actions:
   - {fileID: 7197268818595974994}
   - {fileID: 1485469902274333949}
+--- !u!114 &1802973711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3815714499491088949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0eb14407c764e74880dbc82e9870c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  costs:
+    keys: 02000000
+    values: 01000000
+  bindingName: Jump
+--- !u!114 &1802973725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3815714499491088949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 812df78c582f919498a7a2e0dddadcce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  costs:
+    keys: 03000000
+    values: 01000000
+  bindingName: Dash
+  dashSpeed: 20
+  dashDuration: 1
+  blink: 1
+--- !u!114 &1802973726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3815714499491088949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e520274f1bfa8340a6385dfe5509de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 1802973725}
 --- !u!1 &4718892737052156900
 GameObject:
   m_ObjectHideFlags: 0
