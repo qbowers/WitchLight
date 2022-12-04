@@ -17,22 +17,22 @@ public class PotionSceneTrigger : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D other) {
-
-        if (other.gameObject.name != "Player") {
+        
+        if (!Utils.IsPlayer(other.gameObject)) {
             return;
         }
         isColliding = true;
     }
 
     public void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.name != "Player") {
+        if (!Utils.IsPlayer(other.gameObject)) {
             return;
         }
         isColliding = false;
     }
 
-    private void OnInteractPerformed(InputAction.CallbackContext context)
-    {
+    private void OnInteractPerformed(InputAction.CallbackContext context) {
+        // Debug.Log("Interaction Performed");
         if (isColliding) {
             CoreManager.instance.OpenPotionScreen();
         }
