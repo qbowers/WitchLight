@@ -66,6 +66,8 @@ public class LevelManager : MonoBehaviour {
 
         // Hook up camera
         vcam.Follow = player.transform;
+        vcam.transform.position = player.transform.position;
+
         if (vcamConfiner == null) {
             Debug.Log("Virtual Camera Confiner Component does not exist");
         } else if (levelConfiner == null) {

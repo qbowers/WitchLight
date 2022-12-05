@@ -11,7 +11,7 @@ public class Constants {
     public static string[] Menus = new string[]{StartMenuScene, PauseMenuScene, GameOverMenuScene, WinMenuScene, PotionScene};
 
 
-    public const string LevelSystemsScene = "LevelSystems";
+    // public const string LevelSystemsScene = "LevelSystems";
     public const string LevelOne = "Level 2";
 
     public const string mouseAimBinding = "FPS_player";

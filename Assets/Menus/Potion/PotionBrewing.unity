@@ -993,10 +993,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu Interface
       objectReference: {fileID: 0}
-    - target: {fileID: 2152217658698444419, guid: 2b365e35c4c5a414ca1da086c3aae3d0, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 2152217658698444541, guid: 2b365e35c4c5a414ca1da086c3aae3d0, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1478,7 +1474,7 @@ MonoBehaviour:
   potionShelf: {fileID: 569965998}
   ingredientPrefab: {fileID: 8930631170735006721, guid: 590745606f7104879ad7545ad770f234, type: 3}
   potionPrefab: {fileID: 3548422965632717975, guid: b187f9d002a4843278b0acf81406f6a6, type: 3}
-  menuManager: {fileID: 0}
+  menuManager: {fileID: 1427502943}
 --- !u!1 &1860789067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,10 +1789,6 @@ PrefabInstance:
     - target: {fileID: 1386135322572000730, guid: 125cf826b29e4d54b9c9b1c8d8173bdf, type: 3}
       propertyPath: m_Name
       value: CoreLoader
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386135322572000730, guid: 125cf826b29e4d54b9c9b1c8d8173bdf, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 125cf826b29e4d54b9c9b1c8d8173bdf, type: 3}

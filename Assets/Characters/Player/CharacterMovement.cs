@@ -2,13 +2,14 @@
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
+using System;
+
 //This script handles moving the character on the X axis, both on the ground and in the air.
 
-public class CharacterMovement : MonoBehaviour
-{
+public class CharacterMovement : MonoBehaviour {
 
     [Header("Components")]
-    private Rigidbody2D body;
+    public Rigidbody2D body;
     CharacterGround ground;
 
     [Header("Movement Stats")]
@@ -40,38 +41,33 @@ public class CharacterMovement : MonoBehaviour
     public bool pressingKey;
     public bool isImmune;
 
-    private void Awake()
-    {
+    [NonSerialized, ReadOnlyField] public bool isEnabled = true;
+
+    private void Awake() {
         //Find the character's Rigidbody and ground detection script
         body = GetComponent<Rigidbody2D>();
         ground = GetComponent<CharacterGround>();
     }
 
-    public void OnMovement(InputAction action)
-    {
+    public void OnMovement(InputAction action) {
         //This is called when you input a direction on a valid input type, such as arrow keys or analogue stick
         //The value will read -1 when pressing left, 0 when idle, and 1 when pressing right.        
         directionX = action.ReadValue<float>();
     }
 
-    private void Update()
-    {
+    private void Update() {
         //Used to stop movement when the character is playing her death animation
-        if (!canMove)
-        {
+        if (!canMove) {
             directionX = 0;
         }
 
         //Used to flip the character's sprite when she changes direction
         //Also tells us that we are currently pressing a direction button
-        if (directionX != 0)
-        {
+        if (directionX != 0) {
             transform.localScale = new Vector3(directionX > 0 ? 1 : -1, 1, 1);
             pressingKey = true;
             lastFacing = directionX;
-        }
-        else
-        {
+        } else {
             pressingKey = false;
         }
 
@@ -81,9 +77,9 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         //Fixed update runs in sync with Unity's physics engine
+        if (!isEnabled) return;
 
         //Get Kit's current ground status from her ground script
         onGround = ground.GetOnGround();
@@ -92,39 +88,29 @@ public class CharacterMovement : MonoBehaviour
         velocity = body.velocity;
 
         //Calculate movement, depending on whether "Instant Movement" has been checked
-        if (useAcceleration)
-        {
+        if (useAcceleration) {
             runWithAcceleration();
-        }
-        else
-        {
+        } else {
             runWithoutAcceleration();
         }
     }
 
-    private void runWithAcceleration()
-    {
+    private void runWithAcceleration() {
         //Set our acceleration, deceleration, and turn speed stats, based on whether we're on the ground on in the air
 
         acceleration = onGround ? maxAcceleration : maxAirAcceleration;
         deceleration = onGround ? maxDecceleration : maxAirDeceleration;
         turnSpeed = onGround ? maxTurnSpeed : maxAirTurnSpeed;
 
-        if (pressingKey)
-        {
+        if (pressingKey) {
             //If the sign (i.e. positive or negative) of our input direction doesn't match our movement, it means we're turning around and so should use the turn speed stat.
-            if (Mathf.Sign(directionX) != Mathf.Sign(velocity.x))
-            {
+            if (Mathf.Sign(directionX) != Mathf.Sign(velocity.x)) {
                 maxSpeedChange = turnSpeed * Time.deltaTime;
-            }
-            else
-            {
+            } else {
                 //If they match, it means we're simply running along and so should use the acceleration stat
                 maxSpeedChange = acceleration * Time.deltaTime;
             }
-        }
-        else
-        {
+        } else {
             //And if we're not pressing a direction at all, use the deceleration stat
             maxSpeedChange = deceleration * Time.deltaTime;
         }
@@ -137,8 +123,7 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-    private void runWithoutAcceleration()
-    {
+    private void runWithoutAcceleration() {
         //If we're not using acceleration and deceleration, just send our desired velocity (direction * max speed) to the Rigidbody
         velocity.x = desiredVelocity.x;
 

@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CoreLoader : MonoBehaviour {
-    // Start is called before the first frame update
-    public bool loadLevelSystems = false;
-
     void Awake() {
         Debug.Log("CoreLoader Awake");
 
@@ -15,11 +12,4 @@ public class CoreLoader : MonoBehaviour {
         }
         Destroy(this.gameObject);
     }
-
-    // void Start() {
-
-    //     CoreManager.instance.levelManager.StartLevel(0);
-
-    //     Destroy(this.gameObject);
-    // }
 }

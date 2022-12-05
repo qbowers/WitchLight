@@ -21,8 +21,6 @@ GameObject:
   - component: {fileID: 2062174977}
   - component: {fileID: 2002257035}
   - component: {fileID: 7197268818595974994}
-  - component: {fileID: 1485469902274333949}
-  - component: {fileID: 7197268818595974951}
   - component: {fileID: 1802973711}
   - component: {fileID: 1802973725}
   - component: {fileID: 1802973726}
@@ -4928,6 +4926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf9d1d7e51c54a4ca22d33bb2d13938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 0}
   maxSpeed: 10
   maxAcceleration: 52
   maxDecceleration: 52
@@ -5059,40 +5058,6 @@ MonoBehaviour:
     keys: 02000000
     values: 01000000
   bindingName: Action1
---- !u!114 &1485469902274333949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3815714499491088949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 812df78c582f919498a7a2e0dddadcce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  costs:
-    keys: 03000000
-    values: 01000000
-  bindingName: Dash
-  dashSpeed: 20
-  dashDuration: 1
-  blink: 0
---- !u!114 &7197268818595974951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3815714499491088949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e520274f1bfa8340a6385dfe5509de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions:
-  - {fileID: 7197268818595974994}
-  - {fileID: 1485469902274333949}
 --- !u!114 &1802973711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5126,7 +5091,8 @@ MonoBehaviour:
     values: 01000000
   bindingName: Dash
   dashSpeed: 20
-  dashDuration: 1
+  dashDistance: 6
+  dashDuration: 0.15
   blink: 1
 --- !u!114 &1802973726
 MonoBehaviour:
@@ -5141,6 +5107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actions:
+  - {fileID: 7197268818595974994}
   - {fileID: 1802973725}
 --- !u!1 &4718892737052156900
 GameObject:
