@@ -11,11 +11,17 @@ public class Constants {
     public static string[] Menus = new string[]{StartMenuScene, PauseMenuScene, GameOverMenuScene, WinMenuScene, PotionScene};
 
 
-    public const string LevelSystemsScene = "LevelSystems";
+    // public const string LevelSystemsScene = "LevelSystems";
     public const string LevelOne = "Level 2";
 
     public const string mouseAimBinding = "FPS_player";
     public const string keyboardAimBinding = "Platformer_player";
+
+    public const string DoorTag = "Door";
+    public const string PlayerCamTag = "PlayerCam";
+    public const string MonsterTag = "Monster";
+    public const string PlayerTag = "Player";
+    public const string LevelConfinerTag = "LevelConfiner";
 
 }
 

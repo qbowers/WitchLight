@@ -25,7 +25,8 @@ public class Parallax : MonoBehaviour {
         parallax = camera_object.GetComponent<Camera>().orthographic;
         
 
-        Vector3 camera_position = camera_transform.position;
+        // Vector3 camera_position = camera_transform.position;
+        Vector3 camera_position = Vector3.zero;
 
         if (parallax) {
             // If camera is in orthographic mode, we record each child's current position for later use in the update loop

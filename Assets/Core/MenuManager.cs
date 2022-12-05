@@ -27,7 +27,7 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void Resume() {
-        CoreManager.instance.levelManager.Resume();
+        CoreManager.instance.Resume();
     }
 
     public void LoadLevel() {

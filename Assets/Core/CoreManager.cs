@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class CoreManager : MonoBehaviour {
     public static CoreManager instance = null;
@@ -13,18 +14,22 @@ public class CoreManager : MonoBehaviour {
     [NonSerialized] public string openLevel = Constants.LevelOne;
     [NonSerialized] public string openMenu = null;
 
-    public LevelManager levelManager;
+    // [NonSerialized] public LevelManager levelManager;
     public Inventory inventory;
     public PlayerControls playerControls;
     public PlayerControls.OverarchingActions controlMap;
     public PlayerControls.PlayerActions playerMap;
 
     public GameObject camera;
+    public GameObject playerPrefab;
+    public CinemachineVirtualCamera vcamera;
 
     // Change this flag to switch between FPS and platformer controls
     public string bindingGroupFilter = Constants.mouseAimBinding;
 
     public void Awake() {
+        Debug.Log("CoreManager Awake");
+
         if (CoreManager.instance != null) {
             Destroy(gameObject);
         } else {
@@ -47,40 +52,54 @@ public class CoreManager : MonoBehaviour {
         var bindingGroup = playerControls.controlSchemes.First(x => x.name == bindingGroupFilter).bindingGroup;
             // Set as binding mask on actions. Any binding that doesn't match the mask will be ignored.
             playerControls.bindingMask = InputBinding.MaskByGroup(bindingGroup);
+        
+        // pause button binding
+        controlMap.TogglePause.performed += (context) => {
+            if (openMenu != null) {
+                // A menu is open; game is paused
+                Resume();
+            } else {
+                Pause();
+            }
+        };
 
         // Find or create instances of all other required managers, DontDestroyOnLoad as required
         // e.g. audiomanager, levelmanager, etc.
 
         this.camera = transform.Find("Main Camera").gameObject;
-        this.levelManager = FindOrCreate<LevelManager>();
-        this.inventory = FindOrCreate<Inventory>();
     }
 
-    public T FindOrCreate<T>() where T:Component {
-        // Find existing component
-        T component = gameObject.GetComponent<T>();
-        // If its not there, create it
-        if (component == null) {
-            component = gameObject.AddComponent<T>();
-        }
+    // public T FindOrCreate<T>() where T:Component {
+    //     // Find existing component
+    //     T component = gameObject.GetComponent<T>();
+    //     // If its not there, create it
+    //     if (component == null) {
+    //         component = gameObject.AddComponent<T>();
+    //     }
 
-        return component;
-    } 
+    //     return component;
+    // } 
 
-    public void LoadLevel(string levelName, bool additive = false) {
-        // if level systems don't exist, load them
-        if (additive) SceneManager.LoadScene(Constants.LevelSystemsScene, LoadSceneMode.Additive);
-        else SceneManager.LoadScene(Constants.LevelSystemsScene, LoadSceneMode.Single);
+
+    
+    public int activeDoor;
+    public void LoadLevel(string levelName, bool additive = false, int doorNumber = 0) {
+
+        // Debug.Log("Load Level!");
+        activeDoor = doorNumber;
+
+        if (additive) SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
+        else SceneManager.LoadScene(levelName, LoadSceneMode.Single);
         // additively load scene
-        SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
+        // SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
         // ping the levelmanager that the level is open
-        this.levelManager.StartLevel();
+        // levelManager.StartLevel(doorNumber);
 
-        this.openLevel = levelName;
+        // this.openLevel = levelName;
     }
 
     public void UnloadLevel() {
-        SceneManager.UnloadSceneAsync(Constants.LevelSystemsScene);
+        // SceneManager.UnloadSceneAsync(Constants.LevelSystemsScene);
         SceneManager.UnloadSceneAsync(this.openLevel);
     }
     public void RestartLevel() {
@@ -90,7 +109,8 @@ public class CoreManager : MonoBehaviour {
     public void LoadMenu(string menuName, LoadSceneMode mode = LoadSceneMode.Additive) {
         SceneManager.LoadSceneAsync(menuName, mode);
         // the spawned menu manager will set openMenu to its scene
-        // this.openMenu = menuName;
+        
+        PauseInput();
     }
 
     public void UnloadMenu(string menuName) {
@@ -129,6 +149,34 @@ public class CoreManager : MonoBehaviour {
             playerControls.bindingMask = InputBinding.MaskByGroup(bindingGroup);
             // GameObject.FindWithTag("Player").GetComponent<ItemActionsController>().bindActions();
         }
+    }
+
+
+    public void Pause() {
+        // this.paused = true;
+        // disable any movement input
+        PauseInput();
+        Time.timeScale = 0;
+        CoreManager.instance.LoadMenu(Constants.PauseMenuScene);
+        // poke scene_manager.menu_manager
+    }
+
+    public void OpenPotionScreen() {
+        CoreManager.instance.LoadMenu(Constants.PotionScene);
+        PauseInput();
+    }
+
+    public void PauseInput() {
+        this.playerMap.Disable();
+    }
+    
+    public void Play() {
+        this.playerMap.Enable();
+        Time.timeScale = 1;
+    }
+    public void Resume() {
+        CoreManager.instance.UnloadMenu(CoreManager.instance.openMenu);
+        Play();
     }
 
 }
