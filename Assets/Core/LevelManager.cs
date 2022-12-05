@@ -27,33 +27,45 @@ public class LevelManager : MonoBehaviour {
 
     public void StartLevel(int doorNumber) {
         Debug.Log("Level Start!");
-        // Find the player start pad in the world
-        // TODO: consider using tags or labels or layers or something. IDK.
-        GameObject[] doorObjects = GameObject.FindGameObjectsWithTag(Constants.DoorTag);
 
         CinemachineVirtualCamera vcam = CoreManager.instance.vcamera;
         CinemachineConfiner2D vcamConfiner = vcam.gameObject.GetComponent<CinemachineConfiner2D>();
+        GameObject levelConfiner = GameObject.FindWithTag(Constants.LevelConfinerTag);
 
-
-        // Spawn the player at start pad
+        // Find the door
+        GameObject door = null;
+        GameObject[] doorObjects = GameObject.FindGameObjectsWithTag(Constants.DoorTag);
         foreach(GameObject doorObject in doorObjects) {
-            Door door = doorObject.GetComponent<Door>();
-            if (door.doorNumber == doorNumber) {
-                GameObject player = Instantiate(CoreManager.instance.playerPrefab, doorObject.transform.position + new Vector3(2.5f,0,0), Quaternion.identity);
-
-                vcam.Follow = player.transform;
-                
-                GameObject[] monsters = GameObject.FindGameObjectsWithTag(Constants.MonsterTag);
-                foreach(GameObject monster in monsters) {
-                    try {
-                        monster.GetComponent<GhostMonsterMovement>().player = player.transform;
-                    } catch {}
-                }
+            Door doorCandidate = doorObject.GetComponent<Door>();
+            if (doorCandidate.doorNumber == doorNumber) {
+                door = doorObject;
             }
         }
 
-        GameObject levelConfiner = GameObject.FindWithTag(Constants.LevelConfinerTag);
+        if (door == null) {
+            Debug.Log("No Matching Door Found");
+            return;
+        }
 
+        // Spawn the player at the door
+        GameObject player = Instantiate(CoreManager.instance.playerPrefab, door.transform.position + new Vector3(2.5f,0,0), Quaternion.identity);
+
+
+        // Hook up Monsters
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag(Constants.MonsterTag);
+        foreach(GameObject monster in monsters) {
+            try {
+                monster.GetComponent<GhostMonsterMovement>().player = player.transform;
+            } catch {}
+
+            try {
+                monster.GetComponent<MonsterAI>().target = player.transform;
+            } catch {}
+        }
+
+
+        // Hook up camera
+        vcam.Follow = player.transform;
         if (vcamConfiner == null) {
             Debug.Log("Virtual Camera Confiner Component does not exist");
         } else if (levelConfiner == null) {
@@ -62,7 +74,7 @@ public class LevelManager : MonoBehaviour {
         vcamConfiner.m_BoundingShape2D = levelConfiner.GetComponent<Collider2D>();
 
         
-        // Start enemies, any other world components
+        // Enable controls, resume simulation time
         CoreManager.instance.Play();
     }
 
