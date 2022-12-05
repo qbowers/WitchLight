@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BigJump",
+                    "type": "Button",
+                    "id": "25830aae-a98e-49ad-b2a5-1d1320567462",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -402,6 +411,17 @@
                     "processors": "",
                     "groups": "Platformer_player;FPS_player",
                     "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81e09ac4-11e7-40eb-9789-f70096551dbc",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "FPS_player",
+                    "action": "BigJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
