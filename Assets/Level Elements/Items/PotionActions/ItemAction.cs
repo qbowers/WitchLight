@@ -12,14 +12,17 @@ public abstract class ItemAction : MonoBehaviour {
     }
 
     public bool cost(Inventory inv) {
+        // Ensure there is enough of the item in the inventory
         foreach(var item in costs) {
             ItemType costName = item.Key;
             int costCnt = item.Value;
-            Debug.Log("Action Cost:" + costName.ToString() + " " + costCnt);
+            // Debug.Log("Action Cost:" + costName.ToString() + " " + costCnt);
             if(!inv.enough(costName, costCnt)){
                 return false;
             }
         }
+
+        // Remove required items from inventory
         inv.actionCosts(costs);
         return true;
     }

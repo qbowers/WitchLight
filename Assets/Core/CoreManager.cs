@@ -85,7 +85,7 @@ public class CoreManager : MonoBehaviour {
     public int activeDoor;
     public void LoadLevel(string levelName, bool additive = false, int doorNumber = 0) {
 
-        Debug.Log("Load Level!");
+        // Debug.Log("Load Level!");
         activeDoor = doorNumber;
 
         if (additive) SceneManager.LoadScene(levelName, LoadSceneMode.Additive);

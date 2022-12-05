@@ -11,8 +11,6 @@ public class LevelManager : MonoBehaviour {
 
 
     void Start() {
-        Debug.Log("Level Manager Start");
-
         // CoreManager.instance.levelManager = this;
 
         controlMap = CoreManager.instance.playerControls.Overarching;
@@ -26,7 +24,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void StartLevel(int doorNumber) {
-        Debug.Log("Level Start!");
+        // Debug.Log("Level Start!");
 
         CinemachineVirtualCamera vcam = CoreManager.instance.vcamera;
         CinemachineConfiner2D vcamConfiner = vcam.gameObject.GetComponent<CinemachineConfiner2D>();
@@ -68,11 +66,6 @@ public class LevelManager : MonoBehaviour {
         vcam.Follow = player.transform;
         vcam.transform.position = player.transform.position;
 
-        if (vcamConfiner == null) {
-            Debug.Log("Virtual Camera Confiner Component does not exist");
-        } else if (levelConfiner == null) {
-            Debug.Log("Level Confiner object does not exist");
-        }
         vcamConfiner.m_BoundingShape2D = levelConfiner.GetComponent<Collider2D>();
 
         

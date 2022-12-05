@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CoreLoader : MonoBehaviour {
     void Awake() {
-        Debug.Log("CoreLoader Awake");
+        // Debug.Log("CoreLoader Awake");
 
         if (CoreManager.instance == null) {
             SceneManager.LoadScene("Core", LoadSceneMode.Additive);
