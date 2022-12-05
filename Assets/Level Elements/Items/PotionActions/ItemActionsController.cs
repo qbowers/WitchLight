@@ -21,11 +21,6 @@ public class ItemActionsController : MonoBehaviour {
         
         for (int i = 0; i < actions.Length; i++) {
             ItemAction action = actions[i];
-            if (action == null) {
-                Debug.Log("Action is Null!");
-            } else if (playerControls == null) {
-                Debug.Log("PlayerControls is Null!");
-            }
             InputAction playerMapAction = playerControls.FindAction(action.bindingName, false);
             callbacks[i] = formatActionFunc(action);
             playerMapAction.performed += callbacks[i];
@@ -34,7 +29,7 @@ public class ItemActionsController : MonoBehaviour {
 
     Action<InputAction.CallbackContext> formatActionFunc(ItemAction action) {
         return (context) => {
-            Debug.Log(action.GetType().Name);
+            // Debug.Log(action.GetType().Name);
             if (action.cost(inv)) {
                 action.perform();
             }
