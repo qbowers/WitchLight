@@ -11,8 +11,11 @@ public abstract class Interactable : MonoBehaviour {
 
     void Start() {
         if (onInteract == null) onInteract = new InteractEvent();
-        onInteract.AddListener(Interact);
     }
 
-    public abstract void Interact(Interactor interactor);
+    public void Interact(Interactor interactor) {
+        OnInteract(interactor);
+        onInteract.Invoke(interactor);
+    }
+    public abstract void OnInteract(Interactor interactor);
 }

@@ -8,7 +8,7 @@ public class Door : Interactable {
     public int targetDoorNumber;
 
 
-    public override void Interact(Interactor interactor) {
+    public override void OnInteract(Interactor interactor) {
         // if (!Utils.IsPlayer(other.gameObject)) return;
 
         if (nextLevel.Length == 0) return;

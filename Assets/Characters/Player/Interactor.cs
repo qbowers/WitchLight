@@ -33,7 +33,7 @@ public class Interactor : MonoBehaviour {
         Debug.Log(gameObject.name);
         Debug.Log(interactionQueue.Count);
         if (interactionQueue.Count != 0) {
-            interactionQueue[0].onInteract.Invoke(this);
+            interactionQueue[0].Interact(this);
         }
     }
 }

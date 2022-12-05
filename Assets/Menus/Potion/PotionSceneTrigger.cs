@@ -8,7 +8,7 @@ public class PotionSceneTrigger : Interactable {
     public string level = "PotionBrewing";
     // private bool isColliding = false;
 
-    public override void Interact(Interactor interactor) {
+    public override void OnInteract(Interactor interactor) {
         CoreManager.instance.OpenPotionScreen();
     }
     // void Start() {

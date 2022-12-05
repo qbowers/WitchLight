@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 3815714499491088956}
   - component: {fileID: 2062174977}
   - component: {fileID: 2002257035}
-  - component: {fileID: 7197268818595974994}
   - component: {fileID: 1802973711}
   - component: {fileID: 1802973725}
   - component: {fileID: 1802973726}
@@ -4900,12 +4899,12 @@ MonoBehaviour:
   timeToJumpApex: 0.4
   upwardMovementMultiplier: 1
   downwardMovementMultiplier: 2
+  maxAirJumps: 0
   variablejumpHeight: 1
   jumpCutOff: 3
   fallSpeedLimit: 20
   coyoteTime: 0.15
   jumpBuffer: 0.15
-  doublejump: {fileID: 1802973711}
   jumpSpeed: 0
   gravMultiplier: 0
   canJumpAgain: 0
@@ -5043,22 +5042,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autocollect: 1
---- !u!114 &7197268818595974994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3815714499491088949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0eb14407c764e74880dbc82e9870c08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  costs:
-    keys: 02000000
-    values: 01000000
-  bindingName: Action1
 --- !u!114 &1802973711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5074,7 +5057,9 @@ MonoBehaviour:
   costs:
     keys: 02000000
     values: 01000000
-  bindingName: Jump
+  bindingName: BigJump
+  jumpHeight: 100
+  allowWhileJumping: 1
 --- !u!114 &1802973725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5107,7 +5092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 7197268818595974994}
+  - {fileID: 1802973711}
   - {fileID: 1802973725}
 --- !u!114 &7620874467820121981
 MonoBehaviour:

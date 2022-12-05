@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         // Spawn the player at the door
-        GameObject player = Instantiate(CoreManager.instance.playerPrefab, door.transform.position + new Vector3(2.5f,0,0), Quaternion.identity);
+        GameObject player = Instantiate(CoreManager.instance.playerPrefab, door.transform.position, Quaternion.identity);
 
 
         // Hook up Monsters
@@ -63,10 +63,13 @@ public class LevelManager : MonoBehaviour {
 
 
         // Hook up camera
+        // vcam.enabled = false;
         vcam.Follow = player.transform;
         vcam.transform.position = player.transform.position;
 
         vcamConfiner.m_BoundingShape2D = levelConfiner.GetComponent<Collider2D>();
+        vcam.UpdateCameraState(Vector3.up, 10f);
+        // vcam.enabled = true;
 
         
         // Enable controls, resume simulation time
