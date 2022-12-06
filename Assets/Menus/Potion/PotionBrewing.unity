@@ -1472,6 +1472,7 @@ MonoBehaviour:
   cauldron: {fileID: 810392801}
   ingredientShelf: {fileID: 849257145}
   potionShelf: {fileID: 569965998}
+  shelfCapacity: 12
   ingredientPrefab: {fileID: 8930631170735006721, guid: 590745606f7104879ad7545ad770f234, type: 3}
   potionPrefab: {fileID: 3548422965632717975, guid: b187f9d002a4843278b0acf81406f6a6, type: 3}
   menuManager: {fileID: 1427502943}
