@@ -32,4 +32,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Level Intro Jump.unity
     guid: 2b4648146ec41bf4994bcbb1c9cde0d7
+  - enabled: 1
+    path: Assets/Levels/Level Intro Monster.unity
+    guid: 604cc7e370d8b0a43a283a5e688c23de
+  - enabled: 1
+    path: Assets/Levels/Level M Main 1.unity
+    guid: caa8230e0836efd4ea7b0873243362dc
+  - enabled: 1
+    path: Assets/Levels/Level M Right 1.unity
+    guid: a3ea79d63c802d440a47d521c46035b4
   m_configObjects: {}

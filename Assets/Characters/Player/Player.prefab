@@ -4896,7 +4896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 5
-  timeToJumpApex: 0.4
+  timeToJumpApex: 0.55
   upwardMovementMultiplier: 1
   downwardMovementMultiplier: 2
   maxAirJumps: 0
@@ -4927,7 +4927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 0}
-  maxSpeed: 10
+  maxSpeed: 5
   maxAcceleration: 52
   maxDecceleration: 52
   maxTurnSpeed: 80
