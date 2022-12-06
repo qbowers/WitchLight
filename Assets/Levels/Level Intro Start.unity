@@ -480,6 +480,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrogLeg PickUp Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1219576362773735895, guid: 1249509d06714476ab2f30c76e2ff010, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1249509d06714476ab2f30c76e2ff010, type: 3}
 --- !u!4 &165998052 stripped
