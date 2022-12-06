@@ -29,9 +29,9 @@ public class Interactor : MonoBehaviour {
     // Interaction callback! Handoff to interactable delegate
     void doInteract(InputAction.CallbackContext context) {
         
-        Debug.Log("Interactor!");
-        Debug.Log(gameObject.name);
-        Debug.Log(interactionQueue.Count);
+        // Debug.Log("Interactor!");
+        // Debug.Log(gameObject.name);
+        // Debug.Log(interactionQueue.Count);
         if (interactionQueue.Count != 0) {
             interactionQueue[0].Interact(this);
         }

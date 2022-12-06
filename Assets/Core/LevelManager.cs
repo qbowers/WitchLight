@@ -58,6 +58,8 @@ public class LevelManager : MonoBehaviour {
 
             try {
                 monster.GetComponent<MonsterAI>().target = player.transform;
+                Debug.Log("MonsterAI target Set");
+                Debug.Log(monster.GetComponent<MonsterAI>().target);
             } catch {}
         }
 

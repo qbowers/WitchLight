@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class MonsterAI : MonoBehaviour
-{
+public class MonsterAI : MonoBehaviour {
     // Start is called before the first frame update
     public Transform target;
     public float speed = 20f;
@@ -31,8 +30,7 @@ public class MonsterAI : MonoBehaviour
     private MonsterGround ground;
     private SpiderBrain spiderBrain;
     private bool detected;
-    void Start()
-    {
+    void Start() {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         ground = GetComponent<MonsterGround>();
@@ -42,8 +40,11 @@ public class MonsterAI : MonoBehaviour
 
     }
 
-    private void UpdatePath()
-    {
+    private void UpdatePath() {
+        Debug.Log("I am:");
+        Debug.Log(gameObject.name);
+        Debug.Log("Target: ");
+        Debug.Log(target);
         if (seeker.IsDone())
             seeker.StartPath(rb.position, target.position, OnPathComplete);
     }
