@@ -7037,7 +7037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 834125974891102735, guid: 31cc0f78470b455488ccf17cbad42f48, type: 3}
       propertyPath: m_Name
-      value: Cauldron
+      value: Cauldron Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 730793896370124018, guid: 31cc0f78470b455488ccf17cbad42f48, type: 3}

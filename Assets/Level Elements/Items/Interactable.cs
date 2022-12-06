@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class Interactable : MonoBehaviour {
-    // Start is called before the first frame update
     [Serializable] public class InteractEvent : UnityEvent<Interactor> {}
     public InteractEvent onInteract;
 

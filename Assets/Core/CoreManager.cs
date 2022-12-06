@@ -16,6 +16,7 @@ public class CoreManager : MonoBehaviour {
 
     // [NonSerialized] public LevelManager levelManager;
     public Inventory inventory;
+    public InventoryPanel inventoryPanel;
     public PlayerControls playerControls;
     public PlayerControls.OverarchingActions controlMap;
     public PlayerControls.PlayerActions playerMap;
@@ -162,6 +163,8 @@ public class CoreManager : MonoBehaviour {
     }
 
     public void OpenPotionScreen() {
+        // hide inventory
+        inventoryPanel.GetComponent<CanvasGroup>().alpha = 0;
         CoreManager.instance.LoadMenu(Constants.PotionScene);
         PauseInput();
     }
@@ -171,6 +174,8 @@ public class CoreManager : MonoBehaviour {
     }
     
     public void Play() {
+        // show inventory
+        inventoryPanel.GetComponent<CanvasGroup>().alpha = 1;
         this.playerMap.Enable();
         Time.timeScale = 1;
     }

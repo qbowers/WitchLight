@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potionName: 2
   numPotionsMade: 1
-  potionColor: {r: 0.7647059, g: 0.062745094, b: 0.24642123, a: 0}
-  ingredients: 0000000000000000
+  potionColor: {r: 0.29803923, g: 0.8862745, b: 0.30014235, a: 1}
+  ingredients: 0100000001000000
   successfulStirTime: 2
