@@ -5058,8 +5058,9 @@ MonoBehaviour:
     keys: 02000000
     values: 01000000
   bindingName: BigJump
-  jumpHeight: 100
-  allowWhileJumping: 1
+  jumpHeight: 8
+  jumpDuration: 0.5
+  allowWhileJumping: 0
 --- !u!114 &1802973725
 MonoBehaviour:
   m_ObjectHideFlags: 0

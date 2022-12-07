@@ -70,18 +70,6 @@ public class CoreManager : MonoBehaviour {
         this.camera = transform.Find("Main Camera").gameObject;
     }
 
-    // public T FindOrCreate<T>() where T:Component {
-    //     // Find existing component
-    //     T component = gameObject.GetComponent<T>();
-    //     // If its not there, create it
-    //     if (component == null) {
-    //         component = gameObject.AddComponent<T>();
-    //     }
-
-    //     return component;
-    // } 
-
-
     
     public int activeDoor;
     public void LoadLevel(string levelName, bool additive = false, int doorNumber = 0) {
@@ -118,16 +106,6 @@ public class CoreManager : MonoBehaviour {
         SceneManager.UnloadSceneAsync(menuName);
         this.openMenu = null;
     }
-
-    // public void Pause() {
-    //     this.levelManager.Pause();
-    //     LoadMenu(Constants.PauseMenuScene);
-    // }
-
-    // public void Resume() {
-    //     // TODO: unload pause menu
-    //     this.levelManager.Resume();
-    // }
 
     public void ExitGame() {
         // do any required cleanup
