@@ -12,7 +12,7 @@ public class Constants {
 
 
     // public const string LevelSystemsScene = "LevelSystems";
-    public const string LevelOne = "Level 2";
+    public const string LevelOne = "Level Intro Start";
 
     public const string mouseAimBinding = "FPS_player";
     public const string keyboardAimBinding = "Platformer_player";

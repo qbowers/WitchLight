@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour {
 
 
     void Start() {
-        // CoreManager.instance.levelManager = this;
+        CoreManager.instance.openLevel = gameObject.scene.name;
 
         controlMap = CoreManager.instance.playerControls.Overarching;
         playerMap = CoreManager.instance.playerControls.Player;
