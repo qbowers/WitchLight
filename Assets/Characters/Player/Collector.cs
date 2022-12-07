@@ -21,7 +21,8 @@ public class Collector : MonoBehaviour {
         item = collision.GetComponent<Collectable>();
         if (autocollect && item) {
             inventory.collectInv(item);
-            Destroy(item.gameObject);
+            item.Collect();
+            // Destroy(item.gameObject);
             item = null;
         }
     }

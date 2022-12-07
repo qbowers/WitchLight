@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Interactable : MonoBehaviour {
-    // Start is called before the first frame update
+public class Interactable : MonoBehaviour {
     [Serializable] public class InteractEvent : UnityEvent<Interactor> {}
     public InteractEvent onInteract;
 
@@ -17,5 +16,7 @@ public abstract class Interactable : MonoBehaviour {
         OnInteract(interactor);
         onInteract.Invoke(interactor);
     }
-    public abstract void OnInteract(Interactor interactor);
+    public virtual void OnInteract(Interactor interactor) {
+        Debug.LogError("OnInteract not implemented for " + name);
+    }
 }
