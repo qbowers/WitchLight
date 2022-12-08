@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class ItemAction : MonoBehaviour {
     public UDictionary<ItemType, int> costs;
     public string bindingName;
+    public AudioSource aud;
 
     protected CharacterMovement controller;
     void Awake() {
@@ -24,6 +25,7 @@ public abstract class ItemAction : MonoBehaviour {
 
         // Remove required items from inventory
         inv.actionCosts(costs);
+        aud.Play();
         return true;
     }
 
