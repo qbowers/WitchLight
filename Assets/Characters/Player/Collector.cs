@@ -7,6 +7,7 @@ public class Collector : MonoBehaviour {
     private Inventory inventory;
     private Collectable item;
     public bool autocollect;
+    public AudioSource aud;
     
     void Start() {
         this.inventory = CoreManager.instance.inventory;
@@ -24,6 +25,7 @@ public class Collector : MonoBehaviour {
             item.Collect();
             // Destroy(item.gameObject);
             item = null;
+            aud.Play();
         }
     }
     private void OnTriggerExit2D(Collider2D collision) {
