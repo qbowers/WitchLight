@@ -42,7 +42,6 @@ public class SpiderBrain : MonoBehaviour
         // {
              
         // }
-
         RaycastHit2D hit = Physics2D.Raycast(rayPoint.position, Vector3.down, groundCheckDistance, groundLayer);
         if (hit.collider != null && moveLegs)
         {

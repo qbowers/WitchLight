@@ -21,7 +21,7 @@ public class LegMover : MonoBehaviour
     public MonsterAI monsterAI;
 
     private GameObject spiderBody;
-    // public AudioSource aud;
+    public AudioSource aud;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,8 +60,10 @@ public class LegMover : MonoBehaviour
             legTarget.position = Vector3.Lerp(legTarget.position, targetPoint, legMovementSpeed * Time.deltaTime);
             if (Vector2.Distance(legTarget.position, targetPoint) < 0.1f)
             {
-                // aud.pitch = Random.Range(1.8f, 1.9f);
-                // aud.Play();
+                if (!aud.isPlaying && monsterAI.alwaysDetect){
+                    aud.pitch = Random.Range(1.8f, 1.9f);
+                    aud.Play();
+                } 
                 posIndex = 0;
             }
         }
@@ -74,6 +76,11 @@ public class LegMover : MonoBehaviour
         {
             grounded = false;
         }
+    }
+
+    public void moveToPoint(Vector3 position){
+        targetPoint = position;
+        posIndex = 2;
     }
 
     public void CheckGround()

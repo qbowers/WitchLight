@@ -20,6 +20,7 @@ public class CharacterJuice : MonoBehaviour
     [Header("Components - Audio")]
     [SerializeField] AudioSource jumpSFX;
     [SerializeField] AudioSource landSFX;
+    [SerializeField] AudioSource runSFX;
 
     [Header("Settings - Squash and Stretch")]
     [SerializeField] bool squashAndStretch;
@@ -45,47 +46,44 @@ public class CharacterJuice : MonoBehaviour
     public bool landSqueezing;
     public bool playerGrounded;
 
-    // [Header("Platformer Toolkit Stuff")]
-    // [SerializeField] bool showJumpLine;
-    // [SerializeField] jumpTester jumpLine;
-    // public bool cameraFalling = false;
-
-
     void Start() {
         moveScript = GetComponent<CharacterMovement>();
         jumpScript = GetComponent<CharacterJump>();
     }
 
     void Update() {
-        // tiltCharacter();
-
-        //We need to change the character's running animation to suit their current speed
-        // runningSpeed = Mathf.Clamp(Mathf.Abs(moveScript.velocity.x), 0, maxSpeed);
-        // myAnimator.SetFloat("runSpeed", runningSpeed);
-
-        // checkForLanding();
-
-        // checkForGoingPastJumpLine();
+        tiltCharacter();
+        // We need to change the character's running animation to suit their current speed
+        runningSpeed = Mathf.Clamp(Mathf.Abs(moveScript.velocity.x), 0, maxSpeed);
+        myAnimator.SetFloat("runSpeed", runningSpeed);
+        if (moveScript.velocity.x != 0 && jumpScript.onGround) {
+            if (!runSFX.isPlaying && runSFX.enabled) {
+                runSFX.Play();
+            }
+        }
+        else{
+            runSFX.Stop();
+        }
+        checkForLanding();
     }
 
     private void tiltCharacter() {
-        /*
         //See which direction the character is currently running towards, and tilt in that direction
         float directionToTilt = 0;
         if (moveScript.velocity.x != 0) {
             directionToTilt = Mathf.Sign(moveScript.velocity.x);
+            if (!runSFX.isPlaying && runSFX.enabled) {
+                runSFX.Play();
+            }
         }
-
         //Create a vector that the character will tilt towards
         Vector3 targetRotVector = new Vector3(0, 0, Mathf.Lerp(-maxTilt, maxTilt, Mathf.InverseLerp(-1, 1, directionToTilt)));
-
         //And then rotate the character in that direction
         myAnimator.transform.rotation = Quaternion.RotateTowards(myAnimator.transform.rotation, Quaternion.Euler(-targetRotVector), tiltSpeed * Time.deltaTime);
-        */
+    
     }
 
     private void checkForLanding() {
-        /* 
         if (!playerGrounded && jumpScript.onGround) {
             //By checking for this, and then immediately setting playerGrounded to true, we only run this code once when the player hits the ground 
             playerGrounded = true;
@@ -109,25 +107,11 @@ public class CharacterJuice : MonoBehaviour
             // Player has left the ground, so stop playing the running particles
             playerGrounded = false;
             moveParticles.Stop();
-        } */
+        } 
     }
 
-    // private void checkForGoingPastJumpLine()
-    // {
-    //     //This is related to the "ignore jumps" option on the camera panel.
-    //     if (transform.position.y < jumpLine.transform.position.y - 3)
-    //     {
-    //         cameraFalling = true;
-    //     }
-
-    //     if (cameraFalling)
-    //     {
-    //         jumpLine.characterY = transform.position.y;
-    //     }
-    // }
 
     public void jumpEffects() {
-    /* 
         //Play these effects when the player jumps, courtesy of jump script
         myAnimator.ResetTrigger("Landed");
         myAnimator.SetTrigger("Jump");
@@ -141,13 +125,10 @@ public class CharacterJuice : MonoBehaviour
             StartCoroutine(JumpSqueeze(jumpSquashSettings.x / jumpSqueezeMultiplier, jumpSquashSettings.y * jumpSqueezeMultiplier, jumpSquashSettings.z, 0, true));
 
         }
-
-        jumpParticles.Play(); */
+        jumpParticles.Play();
     }
 
     IEnumerator JumpSqueeze(float xSqueeze, float ySqueeze, float seconds, float dropAmount, bool jumpSqueeze) {
-        yield break;
-        /* 
         //We log that the player is squashing/stretching, so we don't do these calculations more than once
         if (jumpSqueeze) { jumpSqueezing = true; }
         else { landSqueezing = true; }
@@ -170,7 +151,7 @@ public class CharacterJuice : MonoBehaviour
 
         //And then we lerp back to the original scale and position at a speed dicated by the developer
         //It's important to do this to the character's sprite, not the gameobject with a Rigidbody an/or collision detection
-        t = 0f;
+        t = 0.5f;
         while (t <= 1.0) {
             t += Time.deltaTime / seconds;
             characterSprite.transform.localScale = Vector3.Lerp(newSize, originalSize, t);
@@ -180,6 +161,5 @@ public class CharacterJuice : MonoBehaviour
 
         if (jumpSqueeze) { jumpSqueezing = false; }
         else { landSqueezing = false; }
-    */
     }
 }

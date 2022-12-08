@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using System;
+
 //This script handles moving the character on the Y axis, for jumping and gravity
 
 public class CharacterJump : MonoBehaviour {
@@ -9,6 +11,8 @@ public class CharacterJump : MonoBehaviour {
     private CharacterGround ground;
     private Vector2 velocity;
     private CharacterJuice juice;
+
+    [NonSerialized] public bool isEnabled = true;
 
     [Header("Jumping Stats")]
     [SerializeField, Range(2f, 10f)][Tooltip("Maximum jump height")] public float jumpHeight = 7.3f;
@@ -66,6 +70,8 @@ public class CharacterJump : MonoBehaviour {
     }
 
     void Update() {
+        if (!isEnabled) return;
+
         setPhysics();
 
         //Check if we're on ground, using Kit's Ground script
@@ -103,6 +109,7 @@ public class CharacterJump : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if (!isEnabled) return;
         //Get velocity from Kit's Rigidbody 
         velocity = body.velocity;
 

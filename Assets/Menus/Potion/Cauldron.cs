@@ -40,7 +40,11 @@ public class Cauldron : MonoBehaviour {
         // Debug.Log("DropIngredient called");
         if ((ingredient.transform.position - transform.position).magnitude < validDropDistance) {
             addedIngredients.Add(ingredient.ingredientType);
-            Destroy(ingredient.gameObject);
+            // move the ingredient to the cauldron and make it not draggable by destroying the DraggableIngredient script
+            ingredient.transform.SetParent(transform);
+            ingredient.transform.SetSiblingIndex(0); // go under the stir button
+            Destroy(ingredient);
+            // Destroy(ingredient.gameObject);
             // Debug.Log(string.Join(", ", addedIngredients));
 
             trashButton.gameObject.SetActive(true);
@@ -55,6 +59,7 @@ public class Cauldron : MonoBehaviour {
         foreach (Recipe r in recipes) {
             if (addedIngredients.SequenceEqual(r.ingredients)) {
                 // Debug.Log("Recipe made! Ready to stir " + r.potionName);
+                stirButton.image.color = r.potionColor;
                 stirButton.gameObject.SetActive(true);
                 currentRecipe = r;
 
@@ -118,6 +123,12 @@ public class Cauldron : MonoBehaviour {
                 addedIngredients.Clear();
                 stirButton.gameObject.SetActive(false);
                 trashButton.gameObject.SetActive(false);
+
+                // destroy ingredients used
+                foreach (Transform child in transform) {
+                    // if not a button, destroy
+                    if (child.GetComponent<Button>() == null) Destroy(child.gameObject);
+                }
 
                 canStir = false;
                 isStirring = false;
