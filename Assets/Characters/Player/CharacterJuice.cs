@@ -14,7 +14,7 @@ public class CharacterJuice : MonoBehaviour
 
     [Header("Components - Particles")]
     [SerializeField] private ParticleSystem moveParticles;
-    [SerializeField] private ParticleSystem jumpParticles;
+    [SerializeField] public ParticleSystem jumpParticles;
     [SerializeField] private ParticleSystem landParticles;
 
     [Header("Components - Audio")]
@@ -46,9 +46,27 @@ public class CharacterJuice : MonoBehaviour
     public bool landSqueezing;
     public bool playerGrounded;
 
+    public Transform parent;
+    private Rigidbody2D rb;
+
     void Start() {
         moveScript = GetComponent<CharacterMovement>();
         jumpScript = GetComponent<CharacterJump>();
+        rb = GetComponent<Rigidbody2D>();
+
+        jumpParticles = Instantiate(jumpParticles);
+        moveParticles = Instantiate(moveParticles);
+        landParticles = Instantiate(landParticles);
+
+        jumpParticles.transform.parent = GetComponent<Transform>().transform;
+        moveParticles.transform.parent = GetComponent<Transform>().transform;
+        landParticles.transform.parent = GetComponent<Transform>().transform;
+
+        jumpParticles.transform.position = jumpParticles.transform.parent.TransformPoint(0f, -1f, 0f);
+        moveParticles.transform.position = moveParticles.transform.parent.TransformPoint(0f, -1.05f, 0f);
+        landParticles.transform.position = landParticles.transform.parent.TransformPoint(0f, -1f, 0f);
+
+
     }
 
     void Update() {
@@ -66,6 +84,8 @@ public class CharacterJuice : MonoBehaviour
         }
         checkForLanding();
     }
+
+
 
     private void tiltCharacter() {
         //See which direction the character is currently running towards, and tilt in that direction
@@ -96,18 +116,26 @@ public class CharacterJuice : MonoBehaviour
                 landSFX.Play();
             }
 
-            moveParticles.Play();
-
             //Start the landing squash and stretch coroutine.
             if (!landSqueezing && landSqueezeMultiplier > 1) {
                 StartCoroutine(JumpSqueeze(landSquashSettings.x * landSqueezeMultiplier, landSquashSettings.y / landSqueezeMultiplier, landSquashSettings.z, landDrop, false));
             }
 
+            moveParticles.Play();
+
         } else if (playerGrounded && !jumpScript.onGround) {
             // Player has left the ground, so stop playing the running particles
             playerGrounded = false;
             moveParticles.Stop();
-        } 
+        }
+
+        // if (jumpScript.onGround) {
+        //     if (Mathf.Abs(rb.velocity.x) < 0.05) {
+        //         moveParticles.Stop();
+        //     } else {
+        //         moveParticles.Play();
+        //     }
+        // }
     }
 
 
