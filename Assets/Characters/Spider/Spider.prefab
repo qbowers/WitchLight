@@ -4108,7 +4108,6 @@ GameObject:
   - component: {fileID: 831983391}
   - component: {fileID: 831983396}
   - component: {fileID: 831983394}
-  - component: {fileID: 5951361911202666666}
   - component: {fileID: 831983411}
   - component: {fileID: 831983412}
   - component: {fileID: 919011815099416207}
@@ -4253,14 +4252,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.604342, y: 3.3149586}
-      - {x: -0.6905413, y: 3.4025855}
-      - {x: -1.7402426, y: 3.4163609}
+    - - {x: -0.95645607, y: 2.0427454}
       - {x: -1.6605834, y: -0.3285029}
-      - {x: 0.8587826, y: -3.3109257}
-      - {x: 1.8085535, y: -3.3237185}
+      - {x: 0.60996276, y: -2.2443616}
+      - {x: 1.8209947, y: -2.3217883}
       - {x: 4.1996627, y: -0.1299541}
-      - {x: 4.2680902, y: 3.256188}
+      - {x: 3.7082453, y: 2.1734571}
 --- !u!114 &831983390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4273,7 +4270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2045523041d2b034ca72b55420192899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLength: 4
+  groundLength: 2
   colliderOffset: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
@@ -4300,7 +4297,7 @@ MonoBehaviour:
   jumpDelayCounter: 0
   nextWaypointDistance: 3
   alwaysDetect: 0
-  detectionRange: 20
+  detectionRange: 10
   onGround: 1
 --- !u!114 &831983396
 MonoBehaviour:
@@ -4351,39 +4348,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &5951361911202666666
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6237567046551595731}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 4dc1038f1106b4444924c7cc2e694982, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.604342, y: 3.3149586}
-      - {x: -0.6905413, y: 3.4025855}
-      - {x: -1.7402426, y: 3.4163609}
-      - {x: -1.6605834, y: -0.3285029}
-      - {x: 0.8587826, y: -3.3109257}
-      - {x: 1.8085535, y: -3.3237185}
-      - {x: 4.1996627, y: -0.1299541}
-      - {x: 4.2680902, y: 3.256188}
 --- !u!61 &831983411
 BoxCollider2D:
   m_ObjectHideFlags: 0

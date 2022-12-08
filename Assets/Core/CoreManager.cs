@@ -16,6 +16,7 @@ public class CoreManager : MonoBehaviour {
 
     // [NonSerialized] public LevelManager levelManager;
     public Inventory inventory;
+    public InventoryPanel inventoryPanel;
     public PlayerControls playerControls;
     public PlayerControls.OverarchingActions controlMap;
     public PlayerControls.PlayerActions playerMap;
@@ -69,18 +70,6 @@ public class CoreManager : MonoBehaviour {
         this.camera = transform.Find("Main Camera").gameObject;
     }
 
-    // public T FindOrCreate<T>() where T:Component {
-    //     // Find existing component
-    //     T component = gameObject.GetComponent<T>();
-    //     // If its not there, create it
-    //     if (component == null) {
-    //         component = gameObject.AddComponent<T>();
-    //     }
-
-    //     return component;
-    // } 
-
-
     
     public int activeDoor;
     public void LoadLevel(string levelName, bool additive = false, int doorNumber = 0) {
@@ -118,16 +107,6 @@ public class CoreManager : MonoBehaviour {
         this.openMenu = null;
     }
 
-    // public void Pause() {
-    //     this.levelManager.Pause();
-    //     LoadMenu(Constants.PauseMenuScene);
-    // }
-
-    // public void Resume() {
-    //     // TODO: unload pause menu
-    //     this.levelManager.Resume();
-    // }
-
     public void ExitGame() {
         // do any required cleanup
 
@@ -162,6 +141,8 @@ public class CoreManager : MonoBehaviour {
     }
 
     public void OpenPotionScreen() {
+        // hide inventory
+        inventoryPanel.GetComponent<CanvasGroup>().alpha = 0;
         CoreManager.instance.LoadMenu(Constants.PotionScene);
         PauseInput();
     }
@@ -171,6 +152,8 @@ public class CoreManager : MonoBehaviour {
     }
     
     public void Play() {
+        // show inventory
+        inventoryPanel.GetComponent<CanvasGroup>().alpha = 1;
         this.playerMap.Enable();
         Time.timeScale = 1;
     }

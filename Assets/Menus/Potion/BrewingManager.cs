@@ -8,6 +8,7 @@ public class BrewingManager : MonoBehaviour {
     public Cauldron cauldron;
     public Transform ingredientShelf;
     public Transform potionShelf;
+    public int shelfCapacity;
 
     public DraggableIngredient ingredientPrefab;
     public GameObject potionPrefab;
@@ -25,7 +26,7 @@ public class BrewingManager : MonoBehaviour {
         foreach(var ingredient in inventory.invIng) {
             int num = inventory.getItemCnt(ingredient.Key);
             
-            for (int i = 0; i < num; i++) {
+            for (int i = 0; i < num && i < shelfCapacity; i++) {
                 DraggableIngredient ingredientObject = Instantiate(ingredientPrefab, ingredientShelf);
 
                 ingredientObject.cauldron = cauldron;
@@ -36,7 +37,7 @@ public class BrewingManager : MonoBehaviour {
 
         foreach(var potion in inventory.invPot) {
             int num = inventory.getItemCnt(potion.Key);
-            for (int i = 0; i < num; i++) {
+            for (int i = 0; i < num && i < shelfCapacity; i++) {
                 GameObject potionObject = Instantiate(potionPrefab, potionShelf);
                 potionObject.GetComponent<Image>().sprite = potion.Value.image;
             }

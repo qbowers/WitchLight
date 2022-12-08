@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 549782498}
+  inventoryPanel: {fileID: 584746120}
   camera: {fileID: 473668482}
   playerPrefab: {fileID: 3815714499491088949, guid: 9810613a0571fc742a228a9ca1b988c1, type: 3}
   vcamera: {fileID: 535404883}
@@ -435,15 +436,15 @@ MonoBehaviour:
     values:
     - image: {fileID: 21300000, guid: 05c42695fe03acf48824761e84ad79e8, type: 3}
       _count: 0
-    - image: {fileID: 21300000, guid: 55f425c3fa824574eb78db992d965ec3, type: 3}
+    - image: {fileID: 21300000, guid: f238c21583d644670bb16fcb65fdce0a, type: 3}
       _count: 0
   invPot:
     keys: 0200000003000000
     values:
-    - image: {fileID: 21300000, guid: cf4e67c0a35567a438b5c90d5474c087, type: 3}
-      _count: 1
-    - image: {fileID: 21300000, guid: b0b56ad00a47e714c8ae3263771413a8, type: 3}
-      _count: 1
+    - image: {fileID: 21300000, guid: 65ad7e22f15a74ca9b30db8d2a733824, type: 3}
+      _count: 0
+    - image: {fileID: 21300000, guid: f94b2c85a184a0245ab0b8c0550d4942, type: 3}
+      _count: 0
 --- !u!1 &584746116
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +459,7 @@ GameObject:
   - component: {fileID: 584746118}
   - component: {fileID: 584746121}
   - component: {fileID: 584746122}
+  - component: {fileID: 584746123}
   m_Layer: 2
   m_Name: InvPanel
   m_TagString: Untagged
@@ -576,6 +578,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!225 &584746123
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584746116}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &707566740
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +839,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
