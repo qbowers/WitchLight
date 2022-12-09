@@ -8,6 +8,8 @@ public abstract class ItemAction : MonoBehaviour {
     public string bindingName;
     public AudioSource aud;
 
+    public ParticleSystem ps;
+
     protected CharacterMovement controller;
 
     protected PlayerControls.PlayerActions playerMap;
@@ -17,6 +19,10 @@ public abstract class ItemAction : MonoBehaviour {
     
     void Awake() {
         controller = GetComponent<CharacterMovement>();
+
+        ps = Instantiate(ps);
+        ps.transform.parent = GetComponent<Transform>().transform;
+        ps.transform.position = ps.transform.parent.TransformPoint(0f, -1f, 0f);
 
 
         inv = CoreManager.instance.inventory;
@@ -85,6 +91,7 @@ public abstract class ItemAction : MonoBehaviour {
         // Remove required items from inventory
         inv.actionCosts(costs);
         aud.Play();
+        ps.Play();
         return true;
     }
 

@@ -238,12 +238,6 @@ MonoBehaviour:
   leanForward: 0
   maxTilt: 10
   tiltSpeed: 100
-  runningSpeed: 0
-  maxSpeed: 0
-  squeezing: 0
-  jumpSqueezing: 0
-  landSqueezing: 0
-  playerGrounded: 0
 --- !u!114 &1783306787410664932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,6 +358,7 @@ MonoBehaviour:
     values: 01000000
   bindingName: BigJump
   aud: {fileID: 6908166257617518467}
+  ps: {fileID: 3812348761265665469, guid: 426aebd38848bce42a0a273f6a7c676b, type: 3}
   jumpHeight: 8
   jumpDuration: 0.5
   allowWhileJumping: 0
@@ -384,6 +379,7 @@ MonoBehaviour:
     values: 01000000
   bindingName: Dash
   aud: {fileID: 447313568669304151}
+  ps: {fileID: -90557004212540984, guid: 638988d466c21f8408d9973d8ce49bdd, type: 3}
   dashDistance: 6
   dashDuration: 0.15
   blink: 1
@@ -1325,11 +1321,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4222527315535294767, guid: d099e74c2075c9f4c87dd2e3cc81750f, type: 3}
   m_PrefabInstance: {fileID: 624467574021958928}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &6876255574397202866 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6325257231087082658, guid: d099e74c2075c9f4c87dd2e3cc81750f, type: 3}
-  m_PrefabInstance: {fileID: 624467574021958928}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &806922842987712966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1394,11 +1385,6 @@ PrefabInstance:
 --- !u!4 &2085873867715428013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1711446163608891243, guid: 37472f4a20e5c764195caba7e4b69532, type: 3}
-  m_PrefabInstance: {fileID: 806922842987712966}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8726024712076751325 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: -996468478956068837, guid: 37472f4a20e5c764195caba7e4b69532, type: 3}
   m_PrefabInstance: {fileID: 806922842987712966}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2843099895375885637
@@ -1586,11 +1572,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d099e74c2075c9f4c87dd2e3cc81750f, type: 3}
---- !u!198 &1078502928078243114 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6325257231087082658, guid: d099e74c2075c9f4c87dd2e3cc81750f, type: 3}
-  m_PrefabInstance: {fileID: 6426723815538563464}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7181307889601308839 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4222527315535294767, guid: d099e74c2075c9f4c87dd2e3cc81750f, type: 3}
