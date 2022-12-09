@@ -394,16 +394,27 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -996468478956068837, guid: 37472f4a20e5c764195caba7e4b69532, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: -996468478956068837, guid: 37472f4a20e5c764195caba7e4b69532, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1711446163608891243, guid: 37472f4a20e5c764195caba7e4b69532, type: 3}
       propertyPath: m_RootOrder
       value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1711446163608891243, guid: 37472f4a20e5c764195caba7e4b69532, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.894
+      value: 17.98
       objectReference: {fileID: 0}
     - target: {fileID: 1711446163608891243, guid: 37472f4a20e5c764195caba7e4b69532, type: 3}
       propertyPath: m_LocalPosition.y
+      value: -25.6
       value: -24.903
       objectReference: {fileID: 0}
     - target: {fileID: 1711446163608891243, guid: 37472f4a20e5c764195caba7e4b69532, type: 3}
@@ -755,7 +766,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &476196315
 BoxCollider2D:
@@ -23628,7 +23639,7 @@ Transform:
   - {fileID: 47716149}
   - {fileID: 1326697768}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &770512497
 PrefabInstance:
@@ -24157,7 +24168,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1223232402475913280, guid: 9369d515d5025e54890e58c33b949a94, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1223232402475913280, guid: 9369d515d5025e54890e58c33b949a94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25651,7 +25662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2072016268738021707, guid: 8932b830c3a50c640af42d7e2f54fb57, type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2072016268738021707, guid: 8932b830c3a50c640af42d7e2f54fb57, type: 3}
       propertyPath: m_Vertices.Array.data[0].position.x

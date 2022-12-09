@@ -24,13 +24,11 @@ public class DoubleJump : ItemAction {
     }
 
 
+    
+
     IEnumerator jump() {
-        // Disable Gravity (by fixing y position)
-        // controller.body.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
 
         // Set controller parameters (disable the controller's ability to effect player position for a moment)
-        // controller.isImmune = blink;
-        // controller.isEnabled = false;
         charjump.isEnabled = false;
         // cache gravity
         float gravityScale = controller.body.gravityScale;
@@ -43,10 +41,7 @@ public class DoubleJump : ItemAction {
         yield return new WaitForSeconds(jumpDuration);
         
         // Restore Controller parameters
-        // controller.isImmune = false;
-        // controller.isEnabled = true;
         charjump.isEnabled = true;
         controller.body.gravityScale = gravityScale;
-        // controller.body.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

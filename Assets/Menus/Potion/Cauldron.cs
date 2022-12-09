@@ -82,6 +82,12 @@ public class Cauldron : MonoBehaviour {
         }
         addedIngredients.Clear();
 
+        // destroy ingredients used
+        foreach (Transform child in transform) {
+            // if not a button, destroy
+            if (child.GetComponent<Button>() == null) Destroy(child.gameObject);
+        }
+
         stirButton.gameObject.SetActive(false);
         trashButton.gameObject.SetActive(false);
 

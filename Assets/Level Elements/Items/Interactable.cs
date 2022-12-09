@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour {
-    [Serializable] public class InteractEvent : UnityEvent<Interactor> {}
+    
     public InteractEvent onInteract;
 
     void Start() {

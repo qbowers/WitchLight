@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 using System;
 
@@ -10,9 +11,10 @@ public class CharacterJump : MonoBehaviour {
     private Rigidbody2D body;
     private CharacterGround ground;
     private Vector2 velocity;
-    private CharacterJuice juice;
 
     [NonSerialized] public bool isEnabled = true;
+
+    [SerializeField] UnityEvent OnJump;
 
     [Header("Jumping Stats")]
     [SerializeField, Range(2f, 10f)][Tooltip("Maximum jump height")] public float jumpHeight = 7.3f;
@@ -29,7 +31,6 @@ public class CharacterJump : MonoBehaviour {
     [SerializeField][Tooltip("The fastest speed the character can fall")] public float fallSpeedLimit;
     [SerializeField, Range(0f, 0.3f)][Tooltip("How long should coyote time last?")] public float coyoteTime = 0.15f;
     [SerializeField, Range(0f, 0.3f)][Tooltip("How far from ground should we cache your jump?")] public float jumpBuffer = 0.15f;
-    // public ItemAction doublejump;
 
     [Header("Calculations")]
     public float jumpSpeed;
@@ -37,20 +38,20 @@ public class CharacterJump : MonoBehaviour {
     public float gravMultiplier;
 
     [Header("Current State")]
-    [SerializeField, ReadOnlyField] bool canJumpAgain = false;
-    [SerializeField, ReadOnlyField] bool desiredJump;
-    [SerializeField, ReadOnlyField] float jumpBufferCounter;
-    [SerializeField, ReadOnlyField] float coyoteTimeCounter = 0;
-    [SerializeField, ReadOnlyField] bool pressingJump;
-    [SerializeField, ReadOnlyField] public bool onGround;
-    [SerializeField, ReadOnlyField] public bool currentlyJumping;
+    // ReadOnlyField]
+    [SerializeField] bool canJumpAgain = false;
+    [SerializeField] bool desiredJump;
+    [SerializeField] float jumpBufferCounter;
+    [SerializeField] float coyoteTimeCounter = 0;
+    [SerializeField] bool pressingJump;
+    [SerializeField] public bool onGround;
+    [SerializeField] public bool currentlyJumping;
 
     void Awake() {
         //Find the character's Rigidbody and ground detection and juice scripts
 
         body = GetComponent<Rigidbody2D>();
         ground = GetComponent<CharacterGround>();
-        juice = GetComponentInChildren<CharacterJuice>();
         defaultGravityScale = 1f;
     }
 
@@ -116,10 +117,9 @@ public class CharacterJump : MonoBehaviour {
         //Keep trying to do a jump, for as long as desiredJump is true
         if (desiredJump) {
             DoAJump();
-        }
-        //Skip gravity calculations this frame, so currentlyJumping doesn't turn off
-        //This makes sure you can't do the coyote time double jump bug
-        else {
+            //Skip gravity calculations this frame, so currentlyJumping doesn't turn off
+            //This makes sure you can't do the coyote time double jump bug
+        } else {
             calculateGravity();
         }
         //Set the character's Rigidbody's velocity
@@ -141,9 +141,8 @@ public class CharacterJump : MonoBehaviour {
                     //Apply upward multiplier if player is rising and holding jump
                     if (pressingJump && currentlyJumping) {
                         gravMultiplier = upwardMovementMultiplier;
-                    }
-                    //But apply a special downward multiplier if the player lets go of jump
-                    else {
+                    } else {
+                        //But apply a special downward multiplier if the player lets go of jump
                         gravMultiplier = jumpCutOff;
                     }
                 } else {
@@ -154,9 +153,8 @@ public class CharacterJump : MonoBehaviour {
 
         //Else if going down...
         else if (body.velocity.y < -0.01f) {
-            if (onGround)
             //Don't change it if Kit is stood on something (such as a moving platform)
-            {
+            if (onGround) {
                 gravMultiplier = defaultGravityScale;
             } else {
                 //Otherwise, apply the downward gravity multiplier as Kit comes back to Earth
@@ -183,12 +181,6 @@ public class CharacterJump : MonoBehaviour {
             jumpBufferCounter = 0;
             coyoteTimeCounter = 0;
 
-            // // if this is a double jump, use a double jump potion
-            // if (canJumpAgain && !onGround) {
-            //     bool thismustbetrue = doublejump.cost(CoreManager.instance.inventory);
-            //     if (!thismustbetrue) Debug.LogWarning("Doublejump cost error");
-            // }
-
             //If we have double jump on, allow us to jump again (but only once)
             // if canJumpAgain was previously false and air jumps allowed, now canJumpAgain is true. otherwise false.
             canJumpAgain = (maxAirJumps == 1 && !canJumpAgain);
@@ -207,16 +199,11 @@ public class CharacterJump : MonoBehaviour {
                 // Debug.Log("velocity collected " + body.velocity.y);
             }
 
-            //Apply the new jumpSpeed to the velocity. It will be sent to the Rigidbody in FixedUpdate;
-            // Debug.Log(velocity.y);    
             velocity.y += jumpSpeed;
-            // Debug.Log(velocity.y);    
             currentlyJumping = true;
 
-            if (juice != null) {
-                //Apply the jumping effects on the juice script
-                juice.jumpEffects();
-            }
+            // Trigger UnityEvent for any listeners
+            OnJump.Invoke();
         }
 
         if (jumpBuffer == 0) {
@@ -224,10 +211,4 @@ public class CharacterJump : MonoBehaviour {
             desiredJump = false;
         }
     }
-
-
-
-
-
-
 }

@@ -123,7 +123,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""25830aae-a98e-49ad-b2a5-1d1320567462"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.4)"",
                     ""initialStateCheck"": false
                 }
             ],

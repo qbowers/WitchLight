@@ -6,6 +6,6 @@ WitchLight is an atmospheric horror platformer. You play as a witch that has unl
 
 ### Resources:
 
-Character controller taken from:
-Sound resources taken from:
-Art resources taken from:
+Character controller taken from: https://gmtk.itch.io/platformer-toolkit
+
+A* Pathfinding taken from: https://arongranberg.com/
