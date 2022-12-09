@@ -4,8 +4,7 @@ using UnityEngine;
 
 //This script handles purely aesthetic things like particles, squash & stretch, and tilt
 
-public class CharacterJuice : MonoBehaviour
-{
+public class CharacterJuice : MonoBehaviour {
     [Header("Components")]
     CharacterMovement moveScript;
     CharacterJump jumpScript;
@@ -37,16 +36,16 @@ public class CharacterJuice : MonoBehaviour
     [SerializeField, Tooltip("How fast should the character tilt?")] public float tiltSpeed;
 
     [Header("Calculations")]
-    public float runningSpeed;
-    public float maxSpeed;
+    [ReadOnlyField] float runningSpeed;
+    [ReadOnlyField]  float maxSpeed;
 
     [Header("Current State")]
-    public bool squeezing;
-    public bool jumpSqueezing;
-    public bool landSqueezing;
-    public bool playerGrounded;
+    [ReadOnlyField] bool squeezing;
+    [ReadOnlyField] bool jumpSqueezing;
+    [ReadOnlyField] bool landSqueezing;
+    [ReadOnlyField] bool playerGrounded;
 
-    public Transform parent;
+    [System.NonSerialized] public Transform parent;
     private Rigidbody2D rb;
 
     void Start() {
@@ -65,23 +64,21 @@ public class CharacterJuice : MonoBehaviour
         jumpParticles.transform.position = jumpParticles.transform.parent.TransformPoint(0f, -1f, 0f);
         moveParticles.transform.position = moveParticles.transform.parent.TransformPoint(0f, -1.05f, 0f);
         landParticles.transform.position = landParticles.transform.parent.TransformPoint(0f, -1f, 0f);
-
-
     }
 
     void Update() {
         tiltCharacter();
         // We need to change the character's running animation to suit their current speed
         runningSpeed = Mathf.Clamp(Mathf.Abs(moveScript.velocity.x), 0, maxSpeed);
-        myAnimator.SetFloat("runSpeed", runningSpeed);
+        // myAnimator.SetFloat("runSpeed", runningSpeed);
         if (moveScript.velocity.x != 0 && jumpScript.onGround) {
             if (!runSFX.isPlaying && runSFX.enabled) {
                 runSFX.Play();
             }
-        }
-        else{
+        } else {
             runSFX.Stop();
         }
+
         checkForLanding();
     }
 
@@ -96,10 +93,12 @@ public class CharacterJuice : MonoBehaviour
                 runSFX.Play();
             }
         }
+
+        Quaternion currentRotation = characterSprite.transform.rotation;
         //Create a vector that the character will tilt towards
-        Vector3 targetRotVector = new Vector3(0, 0, Mathf.Lerp(-maxTilt, maxTilt, Mathf.InverseLerp(-1, 1, directionToTilt)));
+        Vector3 targetRotVector = new Vector3(0, 0, -Mathf.Lerp(-maxTilt, maxTilt, Mathf.InverseLerp(-1, 1, directionToTilt)));
         //And then rotate the character in that direction
-        myAnimator.transform.rotation = Quaternion.RotateTowards(myAnimator.transform.rotation, Quaternion.Euler(-targetRotVector), tiltSpeed * Time.deltaTime);
+        characterSprite.transform.rotation = Quaternion.RotateTowards(currentRotation, Quaternion.Euler(targetRotVector), tiltSpeed * Time.deltaTime);
     
     }
 
@@ -109,7 +108,7 @@ public class CharacterJuice : MonoBehaviour
             playerGrounded = true;
 
             //Play an animation, some particles, and a sound effect when the player lands
-            myAnimator.SetTrigger("Landed");
+            // myAnimator.SetTrigger("Landed");
             landParticles.Play();
 
             if (!landSFX.isPlaying && landSFX.enabled) {
@@ -129,30 +128,22 @@ public class CharacterJuice : MonoBehaviour
             moveParticles.Stop();
         }
 
-        // if (jumpScript.onGround) {
-        //     if (Mathf.Abs(rb.velocity.x) < 0.05) {
-        //         moveParticles.Stop();
-        //     } else {
-        //         moveParticles.Play();
-        //     }
-        // }
     }
 
 
-    public void jumpEffects() {
-        //Play these effects when the player jumps, courtesy of jump script
-        myAnimator.ResetTrigger("Landed");
-        myAnimator.SetTrigger("Jump");
+    public void JumpEffects() {
+        // Play these effects when the player jumps, courtesy of jump script
+        // myAnimator.ResetTrigger("Landed");
+        // myAnimator.SetTrigger("Jump");
 
         if (jumpSFX.enabled) {
             jumpSFX.Play();
-
         }
 
         if (!jumpSqueezing && jumpSqueezeMultiplier > 1) {
             StartCoroutine(JumpSqueeze(jumpSquashSettings.x / jumpSqueezeMultiplier, jumpSquashSettings.y * jumpSqueezeMultiplier, jumpSquashSettings.z, 0, true));
-
         }
+
         jumpParticles.Play();
     }
 
