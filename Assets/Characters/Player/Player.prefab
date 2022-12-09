@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 2002257035}
   - component: {fileID: 1802973711}
   - component: {fileID: 1802973725}
-  - component: {fileID: 1802973726}
   - component: {fileID: 7620874467820121981}
   m_Layer: 0
   m_Name: Player
@@ -136,6 +135,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac75af4c626de37498e6ea6749834129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onLand:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1802973711}
+        m_TargetAssemblyTypeName: ItemAction, Assembly-CSharp
+        m_MethodName: EnableAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onLeaveGround:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1802973711}
+        m_TargetAssemblyTypeName: ItemAction, Assembly-CSharp
+        m_MethodName: DisableAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   groundLength: 1.13
   colliderOffset: {x: 0.25, y: 0, z: 0}
   groundLayer:
@@ -176,6 +205,7 @@ MonoBehaviour:
   jumpSqueezing: 0
   landSqueezing: 0
   playerGrounded: 0
+  parent: {fileID: 0}
 --- !u!114 &1783306787410664932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,21 +332,6 @@ MonoBehaviour:
   dashDistance: 6
   dashDuration: 0.15
   blink: 1
---- !u!114 &1802973726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3815714499491088949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e520274f1bfa8340a6385dfe5509de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions:
-  - {fileID: 1802973711}
-  - {fileID: 1802973725}
 --- !u!114 &7620874467820121981
 MonoBehaviour:
   m_ObjectHideFlags: 0
