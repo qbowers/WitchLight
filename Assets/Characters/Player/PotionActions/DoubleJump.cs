@@ -17,6 +17,7 @@ public class DoubleJump : ItemAction {
     public override void perform(){
         if (allowWhileJumping || !charjump.currentlyJumping) {
             StartCoroutine(jump());
+            Debug.Log("i'm jumping");
         }
         //     body.velocity = new Vector2(body.velocity.x, 0f);
         //     body.AddForce(jumpHeight* Vector3.up, ForceMode2D.Impulse);
