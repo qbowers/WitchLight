@@ -38,13 +38,14 @@ public class CharacterJump : MonoBehaviour {
     public float gravMultiplier;
 
     [Header("Current State")]
-    [SerializeField, ReadOnlyField] bool canJumpAgain = false;
-    [SerializeField, ReadOnlyField] bool desiredJump;
-    [SerializeField, ReadOnlyField] float jumpBufferCounter;
-    [SerializeField, ReadOnlyField] float coyoteTimeCounter = 0;
-    [SerializeField, ReadOnlyField] bool pressingJump;
-    [SerializeField, ReadOnlyField] public bool onGround;
-    [SerializeField, ReadOnlyField] public bool currentlyJumping;
+    // ReadOnlyField]
+    [SerializeField] bool canJumpAgain = false;
+    [SerializeField] bool desiredJump;
+    [SerializeField] float jumpBufferCounter;
+    [SerializeField] float coyoteTimeCounter = 0;
+    [SerializeField] bool pressingJump;
+    [SerializeField] public bool onGround;
+    [SerializeField] public bool currentlyJumping;
 
     void Awake() {
         //Find the character's Rigidbody and ground detection and juice scripts

@@ -36,14 +36,20 @@ public class CharacterJuice : MonoBehaviour {
     [SerializeField, Tooltip("How fast should the character tilt?")] public float tiltSpeed;
 
     [Header("Calculations")]
-    [ReadOnlyField] float runningSpeed;
-    [ReadOnlyField]  float maxSpeed;
+    // [ReadOnlyField]
+    float runningSpeed;
+    // [ReadOnlyField]
+    float maxSpeed;
 
     [Header("Current State")]
-    [ReadOnlyField] bool squeezing;
-    [ReadOnlyField] bool jumpSqueezing;
-    [ReadOnlyField] bool landSqueezing;
-    [ReadOnlyField] bool playerGrounded;
+    // [ReadOnlyField]
+    bool squeezing;
+    // [ReadOnlyField]
+    bool jumpSqueezing;
+    // [ReadOnlyField]
+    bool landSqueezing;
+    // [ReadOnlyField]
+    bool playerGrounded;
 
     [System.NonSerialized] public Transform parent;
     private Rigidbody2D rb;

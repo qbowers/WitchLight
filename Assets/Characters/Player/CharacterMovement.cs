@@ -40,8 +40,9 @@ public class CharacterMovement : MonoBehaviour {
     public bool onGround;
     public bool pressingKey;
     public bool isImmune;
-
-    [NonSerialized, ReadOnlyField] public bool isEnabled = true;
+    
+    // ReadOnlyField]
+    [NonSerialized] public bool isEnabled = true;
 
     private void Awake() {
         //Find the character's Rigidbody and ground detection script
