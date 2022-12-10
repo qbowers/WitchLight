@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public abstract class ItemAction : MonoBehaviour {
     public UDictionary<ItemType, int> costs;
     public string bindingName;
+    public AudioSource aud;
 
     protected CharacterMovement controller;
 
@@ -81,6 +82,9 @@ public abstract class ItemAction : MonoBehaviour {
             }
         }
 
+        // Remove required items from inventory
+        inv.actionCosts(costs);
+        aud.Play();
         return true;
     }
 
