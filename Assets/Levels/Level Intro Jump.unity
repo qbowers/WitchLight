@@ -305,7 +305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'jump potions requre frog legs
+  m_text: 'jump potions require 2 frog legs
 
     hold W to use'
   m_isRightToLeft: 0
@@ -9091,7 +9091,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1119660318
 Canvas:
   m_ObjectHideFlags: 0
