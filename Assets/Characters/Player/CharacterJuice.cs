@@ -81,8 +81,11 @@ public class CharacterJuice : MonoBehaviour {
             if (!runSFX.isPlaying && runSFX.enabled) {
                 runSFX.Play();
             }
-        } else {
+            if (!moveParticles.isPlaying) moveParticles.Play();
+        }
+        else{
             runSFX.Stop();
+            if (moveParticles.isPlaying) moveParticles.Stop();
         }
 
         checkForLanding();
@@ -114,8 +117,8 @@ public class CharacterJuice : MonoBehaviour {
             playerGrounded = true;
 
             //Play an animation, some particles, and a sound effect when the player lands
-            // myAnimator.SetTrigger("Landed");
-            landParticles.Play();
+            myAnimator.SetTrigger("Landed");
+            if (!landParticles.isPlaying) landParticles.Play();
 
             if (!landSFX.isPlaying && landSFX.enabled) {
                 landSFX.Play();
@@ -131,9 +134,8 @@ public class CharacterJuice : MonoBehaviour {
         } else if (playerGrounded && !jumpScript.onGround) {
             // Player has left the ground, so stop playing the running particles
             playerGrounded = false;
-            moveParticles.Stop();
-        }
-
+            if (moveParticles.isPlaying) moveParticles.Stop();
+        } 
     }
 
 
@@ -149,8 +151,7 @@ public class CharacterJuice : MonoBehaviour {
         if (!jumpSqueezing && jumpSqueezeMultiplier > 1) {
             StartCoroutine(JumpSqueeze(jumpSquashSettings.x / jumpSqueezeMultiplier, jumpSquashSettings.y * jumpSqueezeMultiplier, jumpSquashSettings.z, 0, true));
         }
-
-        jumpParticles.Play();
+        if (!jumpParticles.isPlaying) jumpParticles.Play();
     }
 
     IEnumerator JumpSqueeze(float xSqueeze, float ySqueeze, float seconds, float dropAmount, bool jumpSqueeze) {
