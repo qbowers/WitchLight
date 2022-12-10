@@ -82,8 +82,6 @@ public abstract class ItemAction : MonoBehaviour {
             }
         }
 
-        // Remove required items from inventory
-        inv.actionCosts(costs);
         aud.Play();
         return true;
     }
