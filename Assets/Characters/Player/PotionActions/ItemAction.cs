@@ -7,6 +7,7 @@ public abstract class ItemAction : MonoBehaviour {
     public UDictionary<ItemType, int> costs;
     public string bindingName;
     public AudioSource aud;
+    public ParticleSystem ps;
 
     protected CharacterMovement controller;
 
@@ -17,6 +18,9 @@ public abstract class ItemAction : MonoBehaviour {
     
     void Awake() {
         controller = GetComponent<CharacterMovement>();
+        ps = Instantiate(ps);
+        ps.transform.parent = GetComponent<Transform>().transform;
+        ps.transform.position = ps.transform.parent.TransformPoint(0f, -1f, 0f);
 
 
         inv = CoreManager.instance.inventory;
@@ -83,6 +87,7 @@ public abstract class ItemAction : MonoBehaviour {
         }
 
         aud.Play();
+        ps.Play();
         return true;
     }
 
