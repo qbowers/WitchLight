@@ -73,7 +73,7 @@ public class CoreManager : MonoBehaviour {
     
     public int activeDoor;
     public void LoadLevel(string levelName, bool additive = false, int doorNumber = 0) {
-
+        openMenu = null;
         // Debug.Log("Load Level!");
         activeDoor = doorNumber;
 

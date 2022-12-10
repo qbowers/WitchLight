@@ -8,7 +8,7 @@ public class CharacterJuice : MonoBehaviour {
     [Header("Components")]
     CharacterMovement moveScript;
     CharacterJump jumpScript;
-    [SerializeField] Animator myAnimator;
+    // [SerializeField] Animator myAnimator;
     [SerializeField] GameObject characterSprite;
 
     [Header("Components - Particles")]
@@ -117,7 +117,7 @@ public class CharacterJuice : MonoBehaviour {
             playerGrounded = true;
 
             //Play an animation, some particles, and a sound effect when the player lands
-            myAnimator.SetTrigger("Landed");
+            // myAnimator.SetTrigger("Landed");
             if (!landParticles.isPlaying) landParticles.Play();
 
             if (!landSFX.isPlaying && landSFX.enabled) {
